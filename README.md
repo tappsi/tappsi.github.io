@@ -23,6 +23,7 @@ and the name you prefer, for instance the first post was named `2015-08-20-hello
 
 Use a front matter like
 
+```
 ---
 layout: post
 title:  "My awesome post"
@@ -32,6 +33,7 @@ comments: true
 author_name: Super hacker
 author_github: your githubname
 ---
+```
 
 If you want to use a trick that someone earlier used, feel free to dig in a previous post.
 
