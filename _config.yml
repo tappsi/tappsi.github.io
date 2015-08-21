@@ -1,0 +1,11 @@
+# Site settings
+title: Blog técnico de Tappsi
+email: dev-blog@tappsi.co
+description: > # this means to ignore newlines until "baseurl:"
+  Algo de nuestro día a día construyendo soluciones para los retos
+  que nos encontramos.
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://dev.tappsi.co" # the base hostname & protocol for your site
+
+# Build settings
+markdown: kramdown
