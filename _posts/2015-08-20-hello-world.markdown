@@ -2,13 +2,14 @@
 layout: post
 title:  "Hola Mundo"
 date:   2015-08-20 19:09:52
-categories: jekyll update tappsi
+tags: tappsi spanish
+author_name: Igor Támara
+author_github: ikks
 ---
 
 {% highlight ruby linenos %}
 "Hola mundo"
 {% endhighlight %}
-
 
 Hoy iniciamos nuestro blog técnico de Tappsi, una empresa
 colombiana que a sus tres años es reconocida en el país y fuera de él.
