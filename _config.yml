@@ -7,7 +7,10 @@ title: Tappsi's Engineering and Technology Blog
 subtitle: Taxi fácil y seguro en cualquier lugar.
 author: Tappsi
 simple_search: https://www.google.com/search
-description:
+email: dev-blog@tappsi.co
+description: > # this means to ignore newlines until "baseurl:"
+  Algo de nuestro día a día construyendo soluciones para los retos
+  que nos encontramos.
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
 # You can customize the format as defined in
