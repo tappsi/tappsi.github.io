@@ -93,9 +93,10 @@
 <div class="entry-content"><p>Muchos de nosotros, pasando de Django a Flask, extrañamos las vistas basadas en clases.</p>
 
 <p>Vamos a hacer una <code>ListView</code> que nos ayude a crear listados de objetos, generados
-aparte de un modelo específico.</p>
+apartir de un modelo específico.</p>
 
-<p>Primero definimos una clase base <code>BaseView</code> que nos permitirá</p>
+<p>Primero definimos una clase base <code>BaseView</code> que nos permitirá analizar las peticiones
+y devolver el contexto y renderizar la plantilla:</p>
 
 <figure class='code'><figcaption><span>base.py </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -145,7 +146,9 @@ aparte de un modelo específico.</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Luego heredamos <code>BaseView</code>:</p>
+<p>Luego heredamos <code>BaseView</code> para definir el método <code>get_objects</code>,
+que devuelve un listado de objetos del modelo especificado, y
+<code>get_context</code> para añadir ese listado el el contexto y agregar la paginación:</p>
 
 <figure class='code'><figcaption><span>base.py </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -258,7 +261,27 @@ página (<code>paginate_by</code> o en la configuracón de nuestra aplicación
 </span></code></pre></td></tr></table></div></figure>
 
 
+<p>Donde el modelo de pasajeros se ve así:</p>
 
+<figure class='code'><figcaption><span>views.py </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">class</span> <span class="nc">Passenger</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+</span><span class='line'>    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;passengers&#39;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nb">id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">name</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">(</span><span class="mi">255</span><span class="p">))</span>
+</span><span class='line'>    <span class="n">email</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span> <span class="n">unique</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">phone</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">(</span><span class="mi">255</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ahora podemos crear la plantilla:</p>
 
 <figure class='code'><figcaption><span>list.html  </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -286,7 +309,7 @@ página (<code>paginate_by</code> o en la configuracón de nuestra aplicación
 </span><span class='line'><span class="cp">{%</span> <span class="k">import</span> <span class="s2">&quot;_macros.html&quot;</span> <span class="k">as</span> <span class="nv">macros</span> <span class="cp">%}</span><span class="x"></span>
 </span><span class='line'>
 </span><span class='line'><span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span><span class="x"></span>
-</span><span class='line'><span class="x">&lt;table class=&quot;table table table-condensed&quot;&gt;</span>
+</span><span class='line'><span class="x">&lt;table class=&quot;table&quot;&gt;</span>
 </span><span class='line'><span class="x">  &lt;tbody&gt;</span>
 </span><span class='line'><span class="x">  </span><span class="cp">{%</span> <span class="k">for</span> <span class="nv">passenger</span> <span class="k">in</span> <span class="nv">passengers</span> <span class="cp">%}</span><span class="x"></span>
 </span><span class='line'><span class="x">    &lt;tr&gt;</span>
@@ -371,7 +394,7 @@ página (<code>paginate_by</code> o en la configuracón de nuestra aplicación
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Lee cómo agregar un formulario de búsqueda a tu lista: <a href="/blog/2016/03/18/formulario-de-busqueda-en-flask">Formulario de búsqueda en Flask</a></p>
+<p>Lee más acerca de cómo agregar un formulario de búsqueda a tu lista: <a href="/blog/2016/03/18/formulario-de-busqueda-en-flask">Formulario de búsqueda en Flask</a></p>
 </div>
 
 

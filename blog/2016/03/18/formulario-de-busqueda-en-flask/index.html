@@ -9,8 +9,8 @@
   <meta name="author" content="Tappsi">
 
   
-  <meta name="description" content="
-">
+  <meta name="description" content="En la entrada anterior hicimos una ListView
+para mostrar un listado de objetos que pertenece a un modelo específico. Ahora miramos cómo agregar un &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -91,7 +91,268 @@
   </header>
 
 
-<div class="entry-content">
+<div class="entry-content"><p>En <a href="/blog/2016/03/18/listview-en-flask">la entrada anterior</a> hicimos una <code>ListView</code>
+para mostrar un listado de objetos que pertenece a un modelo específico.</p>
+
+<p>Ahora miramos cómo agregar un formulario de búsqueda, para que nuestro usuario
+pueda filtrar los objetos por sus campos:</p>
+
+<p><img src="/images/posts/passengers-search-form.png" title="Listado de pasajeros con formulario de búsqueda" ></p>
+
+<p>Extendemos la clase <code>ListView</code>, agregando el atributo que se refiere al formulario de búsqueda
+(<code>search_form</code>) y un metodo que genera una peticion de SQLAlchemy a partir de los campos del formulario:</p>
+
+<figure class='code'><figcaption><span>base.py </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">class</span> <span class="nc">ListView</span><span class="p">(</span><span class="n">BaseView</span><span class="p">):</span>
+</span><span class='line'>    <span class="n">methods</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;GET&#39;</span><span class="p">,</span> <span class="s">&#39;POST&#39;</span><span class="p">]</span>
+</span><span class='line'>    <span class="n">template_name</span> <span class="o">=</span> <span class="bp">None</span>
+</span><span class='line'>    <span class="n">context_object_name</span> <span class="o">=</span> <span class="bp">None</span>
+</span><span class='line'>    <span class="n">paginate_by</span> <span class="o">=</span> <span class="bp">None</span>
+</span><span class='line'>    <span class="n">search_form</span> <span class="o">=</span> <span class="bp">None</span>
+</span><span class='line'>    <span class="n">model</span> <span class="o">=</span> <span class="bp">None</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">search_form</span><span class="p">,</span> <span class="n">object_list</span><span class="p">):</span>
+</span><span class='line'>        <span class="c"># Idea from http://stackoverflow.com/a/14876320/914332</span>
+</span><span class='line'>        <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">search_form</span><span class="p">:</span>
+</span><span class='line'>            <span class="k">try</span><span class="p">:</span>
+</span><span class='line'>                <span class="n">key</span><span class="p">,</span> <span class="n">op</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;__&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</span><span class='line'>            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+</span><span class='line'>                <span class="c"># raise Exception(&#39;Invalid filter&#39;)</span>
+</span><span class='line'>                <span class="c"># it also may be csrf_token or submit field</span>
+</span><span class='line'>                <span class="k">continue</span>
+</span><span class='line'>            <span class="n">column</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+</span><span class='line'>            <span class="k">if</span> <span class="ow">not</span> <span class="n">column</span><span class="p">:</span>
+</span><span class='line'>                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&#39;Invalid filter column: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">column</span><span class="p">)</span>
+</span><span class='line'>            <span class="k">if</span> <span class="n">field</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+</span><span class='line'>                <span class="k">if</span> <span class="n">op</span> <span class="o">==</span> <span class="s">&#39;in&#39;</span><span class="p">:</span>
+</span><span class='line'>                    <span class="n">filt</span> <span class="o">=</span> <span class="n">column</span><span class="o">.</span><span class="n">in_</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;,&#39;</span><span class="p">))</span>
+</span><span class='line'>                <span class="k">else</span><span class="p">:</span>
+</span><span class='line'>                    <span class="k">try</span><span class="p">:</span>
+</span><span class='line'>                        <span class="n">attr</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span>
+</span><span class='line'>                            <span class="k">lambda</span> <span class="n">e</span><span class="p">:</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">e</span> <span class="o">%</span> <span class="n">op</span><span class="p">),</span>
+</span><span class='line'>                            <span class="p">[</span><span class="s">&#39;</span><span class="si">%s</span><span class="s">&#39;</span><span class="p">,</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">_&#39;</span><span class="p">,</span> <span class="s">&#39;__</span><span class="si">%s</span><span class="s">__&#39;</span><span class="p">]</span>
+</span><span class='line'>                        <span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">%</span> <span class="n">op</span>
+</span><span class='line'>                    <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+</span><span class='line'>                        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&#39;Invalid filter operator: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">op</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>                    <span class="n">data</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">data</span>
+</span><span class='line'>
+</span><span class='line'>                    <span class="k">if</span> <span class="n">attr</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;ilike&#39;</span><span class="p">,</span> <span class="s">&#39;like&#39;</span><span class="p">):</span>
+</span><span class='line'>                        <span class="n">data</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%%%s%%</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">field</span><span class="o">.</span><span class="n">data</span>
+</span><span class='line'>
+</span><span class='line'>                    <span class="n">filt</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">attr</span><span class="p">)(</span><span class="n">data</span><span class="p">)</span>
+</span><span class='line'>                <span class="n">object_list</span> <span class="o">=</span> <span class="n">object_list</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">filt</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">return</span> <span class="n">object_list</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">get_context</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class='line'>        <span class="n">context</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span class='line'>        <span class="n">context_object_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context_object_name</span> <span class="ow">or</span> <span class="s">&#39;object_list&#39;</span>
+</span><span class='line'>        <span class="n">object_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_objects</span><span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c"># Search form</span>
+</span><span class='line'>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_form</span><span class="p">:</span>
+</span><span class='line'>            <span class="n">search_form</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_form</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">)</span>
+</span><span class='line'>            <span class="n">context</span><span class="p">[</span><span class="s">&#39;search_form&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">search_form</span>
+</span><span class='line'>            <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">&#39;POST&#39;</span> <span class="ow">and</span> <span class="n">search_form</span><span class="o">.</span><span class="n">validate</span><span class="p">():</span>
+</span><span class='line'>                <span class="n">object_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">search_form</span><span class="p">,</span> <span class="n">object_list</span><span class="p">)</span>
+</span><span class='line'>        <span class="c"># Pagination</span>
+</span><span class='line'>        <span class="c"># ... (see previous post)</span>
+</span><span class='line'>        <span class="k">return</span> <span class="n">context</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>La version completa de <code>ListView</code> junto con la vista de ejemplo
+se puede encontrar aquí: <a href="/blog/2016/03/18/listview-en-flask">ListView en Flask</a>.</p>
+
+<p>El el siguiente paso agregamos formulario de búsqueda a nuesra vista:</p>
+
+<figure class='code'><figcaption><span>views.py </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">class</span> <span class="nc">PassengersListView</span><span class="p">(</span><span class="n">ListView</span><span class="p">):</span>
+</span><span class='line'>    <span class="n">template_name</span> <span class="o">=</span> <span class="s">&#39;passengers/list.html&#39;</span>
+</span><span class='line'>    <span class="n">context_object_name</span> <span class="o">=</span> <span class="s">&#39;passengers&#39;</span>
+</span><span class='line'>    <span class="n">search_form</span> <span class="o">=</span> <span class="n">PassengersSearchForm</span>
+</span><span class='line'>    <span class="n">model</span> <span class="o">=</span> <span class="n">Passenger</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>El código del fiormulario es siguiente:</p>
+
+<figure class='code'><figcaption><span>forms.py </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">from</span> <span class="nn">flask_wtf</span> <span class="kn">import</span> <span class="n">Form</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">wtforms</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">SearchForm</span><span class="p">(</span><span class="n">Form</span><span class="p">):</span>
+</span><span class='line'>    <span class="n">submit</span> <span class="o">=</span> <span class="n">wtforms</span><span class="o">.</span><span class="n">SubmitField</span><span class="p">(</span><span class="s">&#39;Filtrar&#39;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</span><span class='line'>        <span class="nb">super</span><span class="p">(</span><span class="n">SearchForm</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+</span><span class='line'>            <span class="n">field</span><span class="o">.</span><span class="n">validators</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">wtforms</span><span class="o">.</span><span class="n">validators</span><span class="o">.</span><span class="n">Optional</span><span class="p">())</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">PassengersSearchForm</span><span class="p">(</span><span class="n">SearchForm</span><span class="p">):</span>
+</span><span class='line'>    <span class="n">id__eq</span> <span class="o">=</span> <span class="n">wtforms</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+</span><span class='line'>    <span class="n">name__ilike</span> <span class="o">=</span> <span class="n">wtforms</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+</span><span class='line'>    <span class="n">email__ilike</span> <span class="o">=</span> <span class="n">wtforms</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Para que la búsqueda funcione, los campos del formulario deben coincidir con los campos
+del modelo <code>Passenger</code> (<a href="/blog/2016/03/18/listview-en-flask">ver el modelo</a>),
+acompañados con operadores de comparación de SQLAlchemy:</p>
+
+<pre><code>eq para ==
+le para &lt;=
+lt para &lt;
+ne para !=
+in
+like
+ilike
+</code></pre>
+
+<p>El listado de operadores se puede encontrar aquí:
+<a href="http://docs.sqlalchemy.org/en/rel_0_8/orm/internals.html#sqlalchemy.orm.properties.ColumnProperty.Comparator">sqlalchemy.orm.properties.ColumnProperty.Comparator</a>.</p>
+
+<p>Luego agregamos el formulario a la plantilla, asociada a la vista:</p>
+
+<figure class='code'><figcaption><span>list.html  </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='jinja'><span class='line'><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;layouts/base.html&quot;</span> <span class="cp">%}</span><span class="x"></span>
+</span><span class='line'><span class="cp">{%</span> <span class="k">import</span> <span class="s2">&quot;bootstrap/wtf.html&quot;</span> <span class="k">as</span> <span class="nv">wtf</span> <span class="cp">%}</span><span class="x"></span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span><span class="x"></span>
+</span><span class='line'><span class="x">&lt;table class=&quot;table&quot;&gt;</span>
+</span><span class='line'><span class="x">  &lt;tbody&gt;</span>
+</span><span class='line'><span class="x">    &lt;form class=&quot;form form-horizontal&quot; method=&quot;post&quot; role=&quot;form&quot; action=&quot;</span><span class="cp">{{</span> <span class="nv">request.path</span> <span class="cp">}}</span><span class="x">&quot;&gt;</span>
+</span><span class='line'><span class="x">      </span><span class="cp">{{</span> <span class="nv">search_form.csrf_token</span> <span class="cp">}}</span><span class="x"></span>
+</span><span class='line'><span class="x">      &lt;tr&gt;</span>
+</span><span class='line'><span class="x">        &lt;td&gt;</span><span class="cp">{{</span> <span class="nv">wtf.form_field</span><span class="o">(</span><span class="nv">search_form.id__eq</span><span class="o">,</span> <span class="nv">form_type</span><span class="o">=</span><span class="s1">&#39;inline&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&lt;/td&gt;</span>
+</span><span class='line'><span class="x">        &lt;td&gt;</span><span class="cp">{{</span> <span class="nv">wtf.form_field</span><span class="o">(</span><span class="nv">search_form.name__ilike</span><span class="o">,</span> <span class="nv">form_type</span><span class="o">=</span><span class="s1">&#39;inline&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&lt;/td&gt;</span>
+</span><span class='line'><span class="x">        &lt;td&gt;</span><span class="cp">{{</span> <span class="nv">wtf.form_field</span><span class="o">(</span><span class="nv">search_form.email__ilike</span><span class="o">,</span> <span class="nv">form_type</span><span class="o">=</span><span class="s1">&#39;inline&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&lt;/td&gt;</span>
+</span><span class='line'><span class="x">        &lt;td&gt;&lt;/td&gt;</span>
+</span><span class='line'><span class="x">        &lt;td&gt;</span><span class="cp">{{</span> <span class="nv">wtf.form_field</span><span class="o">(</span><span class="nv">search_form.submit</span><span class="o">,</span> <span class="nv">form_type</span><span class="o">=</span><span class="s1">&#39;inline&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&lt;/td&gt;</span>
+</span><span class='line'><span class="x">      &lt;/tr&gt;</span>
+</span><span class='line'><span class="x">    &lt;/form&gt;</span>
+</span><span class='line'><span class="x">  </span><span class="cp">{%</span> <span class="k">for</span> <span class="nv">passenger</span> <span class="k">in</span> <span class="nv">passengers</span> <span class="cp">%}</span><span class="x"></span>
+</span><span class='line'><span class="x">    &lt;tr&gt;</span>
+</span><span class='line'><span class="x">      &lt;td&gt;&lt;a href=&quot;</span><span class="cp">{{</span> <span class="nv">url_for</span><span class="o">(</span><span class="s1">&#39;passengers.passenger_detail&#39;</span><span class="o">,</span> <span class="nv">pk</span><span class="o">=</span><span class="nv">passenger.id</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;&gt;</span><span class="cp">{{</span> <span class="nv">passenger.id</span> <span class="cp">}}</span><span class="x">&lt;/a&gt;&lt;/td&gt;</span>
+</span><span class='line'><span class="x">      &lt;td&gt;</span><span class="cp">{{</span> <span class="nv">passenger.name</span> <span class="cp">}}</span><span class="x">&lt;/td&gt;</span>
+</span><span class='line'><span class="x">      &lt;td&gt;</span><span class="cp">{{</span> <span class="nv">passenger.email</span> <span class="cp">}}</span><span class="x">&lt;/td&gt;</span>
+</span><span class='line'><span class="x">      &lt;td&gt;</span><span class="cp">{{</span> <span class="nv">passenger.phone</span> <span class="cp">}}</span><span class="x">&lt;/td&gt;</span>
+</span><span class='line'><span class="x">    &lt;/tr&gt;</span>
+</span><span class='line'><span class="x">  </span><span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span><span class="x"></span>
+</span><span class='line'><span class="x">  &lt;/tbody&gt;</span>
+</span><span class='line'><span class="x">&lt;/table&gt;</span>
+</span><span class='line'><span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>En este ejemplo usamos <a href="https://pythonhosted.org/Flask-Bootstrap/forms.html">Flask-Bootstrap</a>
+para renderizal los formularios con las clases de <a href="http://getbootstrap.com/">Bootstrap</a>.</p>
 </div>
 
 
