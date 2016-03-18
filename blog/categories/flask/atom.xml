@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Flask | Tappsi's Engineering and Technology Blog]]></title>
   <link href="http://tappsi.github.io/blog/categories/flask/atom.xml" rel="self"/>
   <link href="http://tappsi.github.io/"/>
-  <updated>2016-03-18T15:58:54-05:00</updated>
+  <updated>2016-03-18T16:08:44-05:00</updated>
   <id>http://tappsi.github.io/</id>
   <author>
     <name><![CDATA[Tappsi]]></name>
@@ -18,8 +18,8 @@
     <link href="http://tappsi.github.io/blog/2016/03/18/formulario-de-busqueda-en-flask/"/>
     <updated>2016-03-18T10:19:28-05:00</updated>
     <id>http://tappsi.github.io/blog/2016/03/18/formulario-de-busqueda-en-flask</id>
-    <content type="html"><![CDATA[<p>En <a href="/blog/2016/03/18/listview-en-flask">la entrada anterior</a> hicimos una <code>ListView</code>
-para mostrar un listado de objetos que pertenece a un modelo específico.</p>
+    <content type="html"><![CDATA[<p>En <a href="/blog/2016/03/18/listview-en-flask">la entrada anterior</a> hicimos un <code>ListView</code>
+para mostrar un listado de objetos que pertenecen a un modelo específico.</p>
 
 <p>Ahora miramos cómo agregar un formulario de búsqueda, para que nuestro usuario
 pueda filtrar los objetos por sus campos:</p>
@@ -27,7 +27,7 @@ pueda filtrar los objetos por sus campos:</p>
 <p><img src="/images/posts/passengers-search-form.png" title="Listado de pasajeros con formulario de búsqueda" ></p>
 
 <p>Extendemos la clase <code>ListView</code>, agregando el atributo que se refiere al formulario de búsqueda
-(<code>search_form</code>) y un metodo que genera una peticion de SQLAlchemy a partir de los campos del formulario:</p>
+(<code>search_form</code>) y un método que genera una petición de SQLAlchemy a partir de los campos del formulario:</p>
 
 <p><figure class='code'><figcaption><span>base.py </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -148,10 +148,10 @@ pueda filtrar los objetos por sus campos:</p>
 </span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
 </span></code></pre></td></tr></table></div></figure></p>
 
-<p>La version completa de <code>ListView</code> junto con la vista de ejemplo
+<p>La versión completa de <code>ListView</code> junto con la vista de ejemplo
 se puede encontrar aquí: <a href="/blog/2016/03/18/listview-en-flask">ListView en Flask</a>.</p>
 
-<p>El el siguiente paso agregamos formulario de búsqueda a nuesra vista:</p>
+<p>El el siguiente paso agregamos un formulario de búsqueda a nuesra vista:</p>
 
 <p><figure class='code'><figcaption><span>views.py </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -166,7 +166,7 @@ se puede encontrar aquí: <a href="/blog/2016/03/18/listview-en-flask">ListView 
 </span><span class='line'>    <span class="n">model</span> <span class="o">=</span> <span class="n">Passenger</span>
 </span></code></pre></td></tr></table></div></figure></p>
 
-<p>El código del fiormulario es siguiente:</p>
+<p>El código del formulario es siguiente:</p>
 
 <p><figure class='code'><figcaption><span>forms.py </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -287,7 +287,7 @@ ilike
 </span></code></pre></td></tr></table></div></figure></p>
 
 <p>En este ejemplo usamos <a href="https://pythonhosted.org/Flask-Bootstrap/forms.html">Flask-Bootstrap</a>
-para renderizal los formularios con las clases de <a href="http://getbootstrap.com/">Bootstrap</a>.</p>
+para renderizar los formularios con las clases de <a href="http://getbootstrap.com/">Bootstrap</a>.</p>
 ]]></content>
   </entry>
   
@@ -296,10 +296,10 @@ para renderizal los formularios con las clases de <a href="http://getbootstrap.c
     <link href="http://tappsi.github.io/blog/2016/03/18/listview-en-flask/"/>
     <updated>2016-03-18T09:26:50-05:00</updated>
     <id>http://tappsi.github.io/blog/2016/03/18/listview-en-flask</id>
-    <content type="html"><![CDATA[<p>Muchos de nosotros, pasando de Django a Flask, extrañamos las vistas basadas en clases.</p>
+    <content type="html"><![CDATA[<p>Muchos de nosotros, pasando de Django a Flask, extrañamos las vistas basadas en clases (CBV).</p>
 
-<p>Vamos a hacer una <code>ListView</code> que nos ayude a crear listados de objetos, generados
-apartir de un modelo específico.</p>
+<p>Vamos a hacer un <code>ListView</code> que nos ayude a crear listados de objetos, generados
+a partir de un modelo específico.</p>
 
 <p>Primero definimos una clase base <code>BaseView</code> que nos permitirá analizar las peticiones
 y devolver el contexto y renderizar la plantilla:</p>
@@ -357,7 +357,7 @@ y devolver el contexto y renderizar la plantilla:</p>
 
 <p>Luego heredamos <code>BaseView</code> para definir el método <code>get_objects</code>,
 que devuelve un listado de objetos del modelo especificado, y
-<code>get_context</code> para añadir ese listado el el contexto y agregar la paginación:</p>
+<code>get_context</code> para añadir ese listado el contexto y agregar la paginación:</p>
 
 <p><figure class='code'><figcaption><span>base.py </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>

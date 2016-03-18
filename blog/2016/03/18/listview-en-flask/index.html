@@ -9,7 +9,7 @@
   <meta name="author" content="Tappsi">
 
   
-  <meta name="description" content="Muchos de nosotros, pasando de Django a Flask, extrañamos las vistas basadas en clases. Vamos a hacer una ListView que nos ayude a crear listados de &hellip;">
+  <meta name="description" content="Muchos de nosotros, pasando de Django a Flask, extrañamos las vistas basadas en clases (CBV). Vamos a hacer un ListView que nos ayude a crear &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -90,10 +90,10 @@
   </header>
 
 
-<div class="entry-content"><p>Muchos de nosotros, pasando de Django a Flask, extrañamos las vistas basadas en clases.</p>
+<div class="entry-content"><p>Muchos de nosotros, pasando de Django a Flask, extrañamos las vistas basadas en clases (CBV).</p>
 
-<p>Vamos a hacer una <code>ListView</code> que nos ayude a crear listados de objetos, generados
-apartir de un modelo específico.</p>
+<p>Vamos a hacer un <code>ListView</code> que nos ayude a crear listados de objetos, generados
+a partir de un modelo específico.</p>
 
 <p>Primero definimos una clase base <code>BaseView</code> que nos permitirá analizar las peticiones
 y devolver el contexto y renderizar la plantilla:</p>
@@ -148,7 +148,7 @@ y devolver el contexto y renderizar la plantilla:</p>
 
 <p>Luego heredamos <code>BaseView</code> para definir el método <code>get_objects</code>,
 que devuelve un listado de objetos del modelo especificado, y
-<code>get_context</code> para añadir ese listado el el contexto y agregar la paginación:</p>
+<code>get_context</code> para añadir ese listado el contexto y agregar la paginación:</p>
 
 <figure class='code'><figcaption><span>base.py </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>

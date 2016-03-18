@@ -9,8 +9,8 @@
   <meta name="author" content="Tappsi">
 
   
-  <meta name="description" content="En la entrada anterior hicimos una ListView
-para mostrar un listado de objetos que pertenece a un modelo específico. Ahora miramos cómo agregar un &hellip;">
+  <meta name="description" content="En la entrada anterior hicimos un ListView
+para mostrar un listado de objetos que pertenecen a un modelo específico. Ahora miramos cómo agregar un &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,8 +94,8 @@ para mostrar un listado de objetos que pertenece a un modelo específico. Ahora 
   </header>
 
 
-  <div class="entry-content"><p>En <a href="/blog/2016/03/18/listview-en-flask">la entrada anterior</a> hicimos una <code>ListView</code>
-para mostrar un listado de objetos que pertenece a un modelo específico.</p>
+  <div class="entry-content"><p>En <a href="/blog/2016/03/18/listview-en-flask">la entrada anterior</a> hicimos un <code>ListView</code>
+para mostrar un listado de objetos que pertenecen a un modelo específico.</p>
 
 <p>Ahora miramos cómo agregar un formulario de búsqueda, para que nuestro usuario
 pueda filtrar los objetos por sus campos:</p>
@@ -103,7 +103,7 @@ pueda filtrar los objetos por sus campos:</p>
 <p><img src="/images/posts/passengers-search-form.png" title="Listado de pasajeros con formulario de búsqueda" ></p>
 
 <p>Extendemos la clase <code>ListView</code>, agregando el atributo que se refiere al formulario de búsqueda
-(<code>search_form</code>) y un metodo que genera una peticion de SQLAlchemy a partir de los campos del formulario:</p>
+(<code>search_form</code>) y un método que genera una petición de SQLAlchemy a partir de los campos del formulario:</p>
 
 <figure class='code'><figcaption><span>base.py </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -219,10 +219,10 @@ pueda filtrar los objetos por sus campos:</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>La version completa de <code>ListView</code> junto con la vista de ejemplo
+<p>La versión completa de <code>ListView</code> junto con la vista de ejemplo
 se puede encontrar aquí: <a href="/blog/2016/03/18/listview-en-flask">ListView en Flask</a>.</p>
 
-<p>El el siguiente paso agregamos formulario de búsqueda a nuesra vista:</p>
+<p>El el siguiente paso agregamos un formulario de búsqueda a nuesra vista:</p>
 
 <figure class='code'><figcaption><span>views.py </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -238,7 +238,7 @@ se puede encontrar aquí: <a href="/blog/2016/03/18/listview-en-flask">ListView 
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>El código del fiormulario es siguiente:</p>
+<p>El código del formulario es siguiente:</p>
 
 <figure class='code'><figcaption><span>forms.py </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -355,7 +355,7 @@ ilike
 
 
 <p>En este ejemplo usamos <a href="https://pythonhosted.org/Flask-Bootstrap/forms.html">Flask-Bootstrap</a>
-para renderizal los formularios con las clases de <a href="http://getbootstrap.com/">Bootstrap</a>.</p>
+para renderizar los formularios con las clases de <a href="http://getbootstrap.com/">Bootstrap</a>.</p>
 </div>
   
   
@@ -384,10 +384,10 @@ para renderizal los formularios con las clases de <a href="http://getbootstrap.c
   </header>
 
 
-  <div class="entry-content"><p>Muchos de nosotros, pasando de Django a Flask, extrañamos las vistas basadas en clases.</p>
+  <div class="entry-content"><p>Muchos de nosotros, pasando de Django a Flask, extrañamos las vistas basadas en clases (CBV).</p>
 
-<p>Vamos a hacer una <code>ListView</code> que nos ayude a crear listados de objetos, generados
-apartir de un modelo específico.</p>
+<p>Vamos a hacer un <code>ListView</code> que nos ayude a crear listados de objetos, generados
+a partir de un modelo específico.</p>
 
 <p>Primero definimos una clase base <code>BaseView</code> que nos permitirá analizar las peticiones
 y devolver el contexto y renderizar la plantilla:</p>
@@ -442,7 +442,7 @@ y devolver el contexto y renderizar la plantilla:</p>
 
 <p>Luego heredamos <code>BaseView</code> para definir el método <code>get_objects</code>,
 que devuelve un listado de objetos del modelo especificado, y
-<code>get_context</code> para añadir ese listado el el contexto y agregar la paginación:</p>
+<code>get_context</code> para añadir ese listado el contexto y agregar la paginación:</p>
 
 <figure class='code'><figcaption><span>base.py </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
