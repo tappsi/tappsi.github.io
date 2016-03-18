@@ -25,3 +25,16 @@
     git add .
     git commit -m 'your message'
     git push origin source
+
+
+## Octopress Plugins - Usage & Examples
+
+[Insert image](http://octopress.org/docs/plugins/image-tag/):
+
+    {% img [class names] /path/to/image [width] [height] [title text [alt text]] %}
+
+[Blockquote](http://octopress.org/docs/plugins/blockquote/):
+
+    {% blockquote [author[, source]] [link] [source_link_title] %}
+    Quote string
+    {% endblockquote %}
