@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Tappsi's Engineering and Technology Blog]]></title>
-  <link href="http://tappsi.github.io/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Python | Tappsi's Engineering and Technology Blog]]></title>
+  <link href="http://tappsi.github.io/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://tappsi.github.io/"/>
   <updated>2016-03-18T12:05:26-05:00</updated>
   <id>http://tappsi.github.io/</id>
@@ -34,7 +34,7 @@ aparte de un modelo específico.</p>
 
 <p>Primero definimos una clase base <code>BaseView</code> que nos permitirá</p>
 
-<figure class='code'><figcaption><span>base.py </span></figcaption>
+<p><figure class='code'><figcaption><span>base.py </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -57,34 +57,37 @@ aparte de un modelo específico.</p>
 <span class='line-number'>20</span>
 <span class='line-number'>21</span>
 <span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
 </pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">from</span> <span class="nn">flask.views</span> <span class="kn">import</span> <span class="n">View</span>
-</span><span class='line'><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">current_app</span>
+</span><span class='line'><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">current_app</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
 </span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="k">class</span> <span class="nc">BaseView</span><span class="p">(</span><span class="n">View</span><span class="p">):</span>
-</span><span class='line'>    <span class="n">methods</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;GET&#39;</span><span class="p">]</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">class</span> <span class="nc">BaseView</span><span class="p">(</span><span class="n">View</span><span class="p">):</span>
+</span><span class='line'>    <span class="n">methods</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">GET</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;]</span>
 </span><span class='line'>    <span class="n">template_name</span> <span class="o">=</span> <span class="bp">None</span>
-</span><span class='line'>    <span class="n">model</span> <span class="o">=</span> <span class="bp">None</span>
+</span><span class='line'>    <span class="n">model</span> <span class="o">=</span> <span class="bp">None</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">get_template_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span class='line'>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">template_name</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-</span><span class='line'>            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
-</span><span class='line'>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">template_name</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">def</span> <span class="nf">get_template_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">template_name</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+</span><span class='line'>        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+</span><span class='line'>    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">template_name</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">render_template</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
-</span><span class='line'>        <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_template_name</span><span class="p">(),</span> <span class="o">**</span><span class="n">context</span><span class="p">)</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">render_template</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_template_name</span><span class="p">(),</span> <span class="o">**</span><span class="n">context</span><span class="p">)</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">get_context</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span class='line'>        <span class="k">return</span> <span class="p">{}</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">get_context</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">{}</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">dispatch_request</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span class='line'>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">render_template</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_context</span><span class="p">())</span>
-</span></code></pre></td></tr></table></div></figure>
-
+</span><span class='line'><span class="k">def</span> <span class="nf">dispatch_request</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">render_template</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_context</span><span class="p">())</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <p>Luego heredamos <code>BaseView</code>:</p>
 
-<figure class='code'><figcaption><span>base.py </span></figcaption>
+<p><figure class='code'><figcaption><span>base.py </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -116,46 +119,51 @@ aparte de un modelo específico.</p>
 <span class='line-number'>29</span>
 <span class='line-number'>30</span>
 <span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
 </pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">class</span> <span class="nc">ListView</span><span class="p">(</span><span class="n">BaseView</span><span class="p">):</span>
-</span><span class='line'>    <span class="n">methods</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;GET&#39;</span><span class="p">,</span> <span class="s">&#39;POST&#39;</span><span class="p">]</span>
+</span><span class='line'>    <span class="n">methods</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">GET</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;,</span> <span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">POST</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;]</span>
 </span><span class='line'>    <span class="n">template_name</span> <span class="o">=</span> <span class="bp">None</span>
 </span><span class='line'>    <span class="n">context_object_name</span> <span class="o">=</span> <span class="bp">None</span>
 </span><span class='line'>    <span class="n">paginate_by</span> <span class="o">=</span> <span class="bp">None</span>
-</span><span class='line'>    <span class="n">model</span> <span class="o">=</span> <span class="bp">None</span>
+</span><span class='line'>    <span class="n">model</span> <span class="o">=</span> <span class="bp">None</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">get_objects</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span class='line'>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">def</span> <span class="nf">get_objects</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">get_context</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span class='line'>        <span class="n">context</span> <span class="o">=</span> <span class="p">{}</span>
-</span><span class='line'>        <span class="n">context_object_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context_object_name</span> <span class="ow">or</span> <span class="s">&#39;object_list&#39;</span>
-</span><span class='line'>        <span class="n">object_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_objects</span><span class="p">()</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">get_context</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class='line'>    <span class="n">context</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span class='line'>    <span class="n">context_object_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context_object_name</span> <span class="ow">or</span> <span class="s">&#39;object_list&#39;</span>
+</span><span class='line'>    <span class="n">object_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_objects</span><span class="p">()</span>
 </span><span class='line'>
-</span><span class='line'>        <span class="c"># Pagination</span>
-</span><span class='line'>        <span class="n">page</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;page&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
-</span><span class='line'>        <span class="n">pagination</span> <span class="o">=</span> <span class="n">object_list</span><span class="o">.</span><span class="n">paginate</span><span class="p">(</span>
-</span><span class='line'>            <span class="n">page</span><span class="p">,</span>
-</span><span class='line'>            <span class="n">per_page</span><span class="o">=</span><span class="p">(</span>
-</span><span class='line'>                <span class="bp">self</span><span class="o">.</span><span class="n">paginate_by</span> <span class="ow">or</span>
-</span><span class='line'>                <span class="n">current_app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s">&#39;PAGINATION_ITEMS_PER_PAGE&#39;</span><span class="p">]</span>
-</span><span class='line'>            <span class="p">),</span>
-</span><span class='line'>            <span class="n">error_out</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
-</span><span class='line'>        <span class="p">)</span>
-</span><span class='line'>        <span class="n">context</span><span class="p">[</span><span class="s">&#39;pagination&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pagination</span>
-</span><span class='line'>        <span class="n">context</span><span class="p">[</span><span class="n">context_object_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">pagination</span><span class="o">.</span><span class="n">items</span>
-</span><span class='line'>        <span class="k">return</span> <span class="n">context</span>
+</span><span class='line'>    <span class="c"># Pagination</span>
+</span><span class='line'>    <span class="n">page</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;page&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">pagination</span> <span class="o">=</span> <span class="n">object_list</span><span class="o">.</span><span class="n">paginate</span><span class="p">(</span>
+</span><span class='line'>        <span class="n">page</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">per_page</span><span class="o">=</span><span class="p">(</span>
+</span><span class='line'>            <span class="bp">self</span><span class="o">.</span><span class="n">paginate_by</span> <span class="ow">or</span>
+</span><span class='line'>            <span class="n">current_app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s">&#39;PAGINATION_ITEMS_PER_PAGE&#39;</span><span class="p">]</span>
+</span><span class='line'>        <span class="p">),</span>
+</span><span class='line'>        <span class="n">error_out</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+</span><span class='line'>    <span class="p">)</span>
+</span><span class='line'>    <span class="n">context</span><span class="p">[</span><span class="s">&#39;pagination&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pagination</span>
+</span><span class='line'>    <span class="n">context</span><span class="p">[</span><span class="n">context_object_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">pagination</span><span class="o">.</span><span class="n">items</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">context</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">dispatch_request</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span class='line'>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">render_template</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_context</span><span class="p">())</span>
-</span></code></pre></td></tr></table></div></figure>
-
+</span><span class='line'><span class="k">def</span> <span class="nf">dispatch_request</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">render_template</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_context</span><span class="p">())</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <p>Para usar <code>ListView</code> tenemos que especificar el modelo (<code>model</code>),
 ruta hacía la plantilla (<code>template_name</code>) y número de objetos por
 página (<code>paginate_by</code> o en la configuracón de nuestra aplicación
 <code>current_app.config['PAGINATION_ITEMS_PER_PAGE']</code>):</p>
 
-<figure class='code'><figcaption><span>views.py </span></figcaption>
+<p><figure class='code'><figcaption><span>views.py </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -173,31 +181,26 @@ página (<code>paginate_by</code> o en la configuracón de nuestra aplicación
 <span class='line-number'>15</span>
 <span class='line-number'>16</span>
 <span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Blueprint</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Blueprint</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="kn">from</span> <span class="nn">passengers.models</span> <span class="kn">import</span> <span class="n">Passenger</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kn">from</span> <span class="nn">passengers.models</span> <span class="kn">import</span> <span class="n">Passenger</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
 </span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">passengers</span> <span class="o">=</span> <span class="n">Blueprint</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">passengers</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;,</span> <span class="o">&lt;</span><span class="n">strong</span><span class="o">&gt;</span><span class="n">name</span><span class="o">&lt;/</span><span class="n">strong</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">template_folder</span><span class="o">=&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">templates</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;)</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="n">passengers</span> <span class="o">=</span> <span class="n">Blueprint</span><span class="p">(</span><span class="s">&#39;passengers&#39;</span><span class="p">,</span> <span class="n">__name__</span><span class="p">,</span> <span class="n">template_folder</span><span class="o">=</span><span class="s">&#39;templates&#39;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="k">class</span> <span class="nc">PassengersListView</span><span class="p">(</span><span class="n">ListView</span><span class="p">):</span>
-</span><span class='line'>    <span class="n">template_name</span> <span class="o">=</span> <span class="s">&#39;passengers/list.html&#39;</span>
-</span><span class='line'>    <span class="n">context_object_name</span> <span class="o">=</span> <span class="s">&#39;passengers&#39;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">class</span> <span class="nc">PassengersListView</span><span class="p">(</span><span class="n">ListView</span><span class="p">):</span>
+</span><span class='line'>    <span class="n">template_name</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">passengers</span><span class="o">/</span><span class="nb">list</span><span class="o">.</span><span class="n">html</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">context_object_name</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">passengers</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;</span>
 </span><span class='line'>    <span class="n">model</span> <span class="o">=</span> <span class="n">Passenger</span>
-</span><span class='line'>    <span class="n">paginate_by</span> <span class="o">=</span> <span class="mi">10</span>
+</span><span class='line'>    <span class="n">paginate_by</span> <span class="o">=</span> <span class="mi">10</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">get_objects</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span class='line'>        <span class="k">return</span> <span class="n">Passenger</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Passenger</span><span class="o">.</span><span class="n">created_at</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">def</span> <span class="nf">get_objects</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">Passenger</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Passenger</span><span class="o">.</span><span class="n">created_at</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="n">passengers</span><span class="o">.</span><span class="n">add_url_rule</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">,</span> <span class="n">view_func</span><span class="o">=</span><span class="n">PassengersListView</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span><span class="s">&#39;list&#39;</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">passengers</span><span class="o">.</span><span class="n">add_url_rule</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="o">/&amp;</span><span class="n">rsquo</span><span class="p">;,</span> <span class="n">view_func</span><span class="o">=</span><span class="n">PassengersListView</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="nb">list</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;))</span>
+</span></code></pre></td></tr></table></div></figure></p>
 
-
-
-
-<figure class='code'><figcaption><span>list.html  </span></figcaption>
+<p><figure class='code'><figcaption><span>list.html  </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -219,10 +222,17 @@ página (<code>paginate_by</code> o en la configuracón de nuestra aplicación
 <span class='line-number'>19</span>
 <span class='line-number'>20</span>
 <span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class='jinja'><span class='line'><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;layouts/base.html&quot;</span> <span class="cp">%}</span><span class="x"></span>
-</span><span class='line'><span class="cp">{%</span> <span class="k">import</span> <span class="s2">&quot;_macros.html&quot;</span> <span class="k">as</span> <span class="nv">macros</span> <span class="cp">%}</span><span class="x"></span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='jinja'><span class='line'><span class="cp">{%</span> <span class="k">extends</span> <span class="p">&amp;</span><span class="nv">ldquo</span><span class="p">;</span><span class="nv">layouts</span><span class="o">/</span><span class="nv">base.html</span><span class="p">&amp;</span><span class="nv">rdquo</span><span class="p">;</span> <span class="cp">%}</span><span class="x"></span>
+</span><span class='line'><span class="cp">{%</span> <span class="k">import</span> <span class="p">&amp;</span><span class="nv">ldquo</span><span class="p">;_</span><span class="nv">macros.html</span><span class="p">&amp;</span><span class="nv">rdquo</span><span class="p">;</span> <span class="k">as</span> <span class="nv">macros</span> <span class="cp">%}</span><span class="x">&lt;/p&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span><span class="x"></span>
+</span><span class='line'><span class="x">&lt;p&gt;</span><span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span><span class="x">&lt;/p&gt;</span>
+</span><span class='line'>
 </span><span class='line'><span class="x">&lt;table class=&quot;table table table-condensed&quot;&gt;</span>
 </span><span class='line'><span class="x">  &lt;tbody&gt;</span>
 </span><span class='line'><span class="x">  </span><span class="cp">{%</span> <span class="k">for</span> <span class="nv">passenger</span> <span class="k">in</span> <span class="nv">passengers</span> <span class="cp">%}</span><span class="x"></span>
@@ -236,17 +246,21 @@ página (<code>paginate_by</code> o en la configuracón de nuestra aplicación
 </span><span class='line'><span class="x">  &lt;/tbody&gt;</span>
 </span><span class='line'><span class="x">&lt;/table&gt;</span>
 </span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>
 </span><span class='line'><span class="x">&lt;div class=&quot;pagination&quot;&gt;</span>
 </span><span class='line'><span class="x">  </span><span class="cp">{{</span> <span class="nv">macros.pagination_widget</span><span class="o">(</span><span class="nv">pagination</span><span class="o">,</span> <span class="s1">&#39;.index&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x"></span>
 </span><span class='line'><span class="x">&lt;/div&gt;</span>
-</span><span class='line'><span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span><span class="x"></span>
-</span></code></pre></td></tr></table></div></figure>
-
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;p&gt;</span><span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <p>El widget para la paginación está basado en el snippet de
 <a href="http://flask.pocoo.org/snippets/44/">Simple Pagination</a>:</p>
 
-<figure class='code'><figcaption><span>_macros.html  </span></figcaption>
+<p><figure class='code'><figcaption><span>_macros.html  </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -276,7 +290,11 @@ página (<code>paginate_by</code> o en la configuracón de nuestra aplicación
 <span class='line-number'>27</span>
 <span class='line-number'>28</span>
 <span class='line-number'>29</span>
-</pre></td><td class='code'><pre><code class='jinja'><span class='line'><span class="cp">{%</span> <span class="k">macro</span> <span class="nv">pagination_widget</span><span class="o">(</span><span class="nv">pagination</span><span class="o">,</span> <span class="nv">endpoint</span><span class="o">)</span> <span class="cp">%}</span><span class="x"></span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class='jinja'><span class='line'><span class="cp">{%</span> <span class="k">macro</span> <span class="nv">pagination_widget</span><span class="o">(</span><span class="nv">pagination</span><span class="o">,</span> <span class="nv">endpoint</span><span class="o">)</span> <span class="cp">%}</span><span class="x">&lt;/p&gt;</span>
+</span><span class='line'>
 </span><span class='line'><span class="x">&lt;ul class=&quot;pagination&quot;&gt;</span>
 </span><span class='line'><span class="x">    &lt;li</span><span class="cp">{%</span> <span class="k">if</span> <span class="k">not</span> <span class="nv">pagination.has_prev</span> <span class="cp">%}</span><span class="x"> class=&quot;disabled&quot;</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span><span class="x">&gt;</span>
 </span><span class='line'><span class="x">        &lt;a href=&quot;</span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">pagination.has_prev</span> <span class="cp">%}{{</span> <span class="nv">url_for</span><span class="o">(</span><span class="nv">endpoint</span><span class="o">,</span> <span class="nv">page</span> <span class="o">=</span> <span class="nv">pagination.page</span> <span class="o">-</span> <span class="m">1</span><span class="o">,</span> <span class="o">**</span><span class="nv">kwargs</span><span class="o">)</span> <span class="cp">}}{%</span> <span class="k">else</span> <span class="cp">%}</span><span class="x">#</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span><span class="x">&quot;&gt;</span>
@@ -304,11 +322,12 @@ página (<code>paginate_by</code> o en la configuracón de nuestra aplicación
 </span><span class='line'><span class="x">        &lt;/a&gt;</span>
 </span><span class='line'><span class="x">    &lt;/li&gt;</span>
 </span><span class='line'><span class="x">&lt;/ul&gt;</span>
-</span><span class='line'><span class="cp">{%</span> <span class="k">endmacro</span> <span class="cp">%}</span><span class="x"></span>
-</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="x">&lt;p&gt;</span><span class="cp">{%</span> <span class="k">endmacro</span> <span class="cp">%}</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure></p>
 
-
-<p>Lee cómo agregar un formulario de búsqueda a tu lista: <a href="http://tappsi.github.io/blog/2016/03/18/formulario-de-busqueda-en-flask">Formulario de búsqueda en Flask</a></p>
+<p>Lee cómo agregar un formulario de búsqueda a tu lista: <a href="/blog/2016/03/18/formulario-de-busqueda-en-flask">Formulario de búsqueda en Flask</a></p>
 ]]></content>
   </entry>
   
