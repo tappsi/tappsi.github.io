@@ -5,13 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Blog Archive - Tappsi's Engineering and Technology Blog</title>
+  <title>Gráficas Versionadas - Tappsi's Engineering and Technology Blog</title>
   <meta name="author" content="Tappsi">
 
   
-  <meta name="description" content="Blog Archive 2016 Gráficas Versionadas
-Apr 07 2016 posted in documentation Formulario De Búsqueda en Flask
-Mar 18 2016 posted in flask, python &hellip;">
+  <meta name="description" content="Mis habilidades gráficas y sentido artístico están por
+debajo de la media y dado que no aprendí ni me gusta
+dibujar y que uso sistemas de manejo de &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,14 +19,14 @@ Mar 18 2016 posted in flask, python &hellip;">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <meta property="og:title" content="Blog Archive - Tappsi's Engineering and Technology Blog" />
+  <meta property="og:title" content="Gráficas Versionadas - Tappsi's Engineering and Technology Blog" />
   <meta property="og:type"   content="website" />
   <meta property="og:url" content="" />
   <meta property="og:image" content="/images/logo.jpg" />
   <meta property="og:description" content="Pide tappsis seguros para tus clientes" />
 
   
-  <link rel="canonical" href="http://tappsi.github.io/blog/archives/">
+  <link rel="canonical" href="http://tappsi.github.io/blog/2016/04/07/versioned-graphs/">
   <link href="/favicon.ico" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Tappsi's Engineering and Technology Blog" type="application/atom+xml">
@@ -90,64 +90,120 @@ Mar 18 2016 posted in flask, python &hellip;">
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Blog Archive</h1>
+    
+      <h1 class="entry-title">Gráficas Versionadas</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-04-07T15:33:44-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>3:33 pm</span></time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives">
 
 
+<div class="entry-content"><p>Mis habilidades gráficas y sentido artístico están por
+debajo de la media y dado que no aprendí ni me gusta
+dibujar y que uso sistemas de manejo de versiones para
+mi trabajo diario, hay una opción para generar gráficas
+sencillas y poder modificarlas rápidamente.</p>
 
-  
-  <h2>2016</h2>
+<p>El honorable <a href="http://www.graphviz.org/">graphviz</a> que
+en cualquier distribución es fácil de instalar , por ejemplo
+<code>apt-get install graphviz</code> es una opción para evaluar.</p>
 
-<article>
-  
-<h1><a href="/blog/2016/04/07/versioned-graphs/">Gráficas Versionadas</a></h1>
-<time datetime="2016-04-07T15:33:44-05:00" pubdate><span class='month'>Apr</span> <span class='day'>07</span> <span class='year'>2016</span></time>
+<p>Vía
+<a href="http://www.webgraphviz.com/">webgraphvizweb</a> es muy sencillo
+hacer la edición.</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/documentation/'>documentation</a></span>
-</footer>
+<p>Por ejemplo, para hacer una gráfica como la siguiente:</p>
 
+<p><img src="/images/posts/graphviz-simple-diagram.png" title="ejemplo mínimo de graphviz" ></p>
 
-</article>
+<p>Se escribe:</p>
 
-
-
-<article>
-  
-<h1><a href="/blog/2016/03/18/formulario-de-busqueda-en-flask/">Formulario De Búsqueda en Flask</a></h1>
-<time datetime="2016-03-18T10:19:28-05:00" pubdate><span class='month'>Mar</span> <span class='day'>18</span> <span class='year'>2016</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/flask/'>flask</a>, <a class='category' href='/blog/categories/python/'>python</a></span>
-</footer>
-
-
-</article>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>A -&gt; B
+</span><span class='line'>B -&gt; C
+</span><span class='line'>A -&gt; C</span></code></pre></td></tr></table></div></figure>
 
 
+<p>Esta herramienta está integrada en varias soluciones como:</p>
 
-<article>
-  
-<h1><a href="/blog/2016/03/18/listview-en-flask/">ListView en Flask</a></h1>
-<time datetime="2016-03-18T09:26:50-05:00" pubdate><span class='month'>Mar</span> <span class='day'>18</span> <span class='year'>2016</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/flask/'>flask</a>, <a class='category' href='/blog/categories/python/'>python</a></span>
-</footer>
+<ul>
+<li><a href="https://moinmo.in/GraphVizForMoin">MoinMoin</a></li>
+<li><a href="http://mkdocs.org">mkdocs</a></li>
+</ul>
 
 
-</article>
+<p>Aunque los gráficos lucen un poco arcaicos, es fácil actualizarlos y en una empresa en la cual hay evolución
+continua de procesos tiene todo el sentido contar con ella.</p>
 
+<p>¿Ha encontrado otras soluciones que sean sencillas y permitan algo similar?</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Igor Támara</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2016-04-07T15:33:44-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>3:33 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/documentation/'>documentation</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://tappsi.github.io/blog/2016/04/07/versioned-graphs/" data-via="tappsico" data-counturl="http://tappsi.github.io/blog/2016/04/07/versioned-graphs/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2016/03/18/formulario-de-busqueda-en-flask/" title="Previous Post: Formulario de búsqueda en Flask">&laquo; Formulario de búsqueda en Flask</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -256,7 +312,10 @@ Mar 18 2016 posted in flask, python &hellip;">
       var disqus_shortname = 'tappsitechblog';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tappsi.github.io/blog/2016/04/07/versioned-graphs/';
+        var disqus_url = 'http://tappsi.github.io/blog/2016/04/07/versioned-graphs/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
