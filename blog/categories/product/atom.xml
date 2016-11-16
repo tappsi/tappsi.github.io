@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Product | Tappsi's Engineering and Technology Blog]]></title>
+  <link href="http://tappsi.github.io/blog/categories/product/atom.xml" rel="self"/>
+  <link href="http://tappsi.github.io/"/>
+  <updated>2016-11-16T09:05:18-05:00</updated>
+  <id>http://tappsi.github.io/</id>
+  <author>
+    <name><![CDATA[Tappsi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Manejar El Crecimiento]]></title>
+    <link href="http://tappsi.github.io/blog/2016/11/16/manejar-el-crecimiento/"/>
+    <updated>2016-11-16T06:56:01-05:00</updated>
+    <id>http://tappsi.github.io/blog/2016/11/16/manejar-el-crecimiento</id>
+    <content type="html"><![CDATA[<p>De un MVP a un producto, sobrevivir a los dos primeros años de una startup
+consiguiendo dinero de inversionistas y lograr que aquello que se construyó
+con rapidez escale tiene retos organizacionales y técnicos, madurar y evolucionar, entender que esto conlleva a cambios de ritmos y escalamientos.</p>
+
+<p>Este escrito va dirigido a personas no técnicas, pero que están relacionadas
+con la tecnología en el cual mostramos algunas metáforas para alinear las
+expectativas con las realidades del crecimiento.</p>
+
+<h2>Dinero</h2>
+
+<p>Al comienzo de una startup, cuando el dinero escasea, hay que hacer prototipos
+rápidos y mostrar que efectivamente estas pruebas de concepto llegan a producción.</p>
+
+<p>Idealmente se cuenta con un producto que hace lo que tiene que hacer y esta
+prueba de concepto es capaz de servir a una centena o miles de usuarios si se
+emplearon herramientas con un equipo pequeño y ágil.</p>
+
+<p><img src="/images/posts/managing-growth-mvp.jpg" title="ejemplo mínimo de graphviz" ></p>
+
+<p>En ese momento lo que se logró fue crear una canoa que era muy rápida para
+cruzar ríos, el balance entre la estabilidad y la innovación está claramente
+definido en el marco de presentaciones a los inversionistas.  La canoa puede ser preciosa, pero sigue siendo una canoa.</p>
+
+<p>Después de pasar las rondas de inversión, se desea contar con un producto que
+sea capaz de mostrar el crecimiento y la estabilidad necesaria para que las
+personas que lo usan se sientan en una embarcación así:</p>
+
+<p><img src="/images/posts/managing-growth-goal.jpg" title="ejemplo mínimo de graphviz" ></p>
+
+<p>El único detalle es que ya los órdenes de magnitud en cantidad de usuarios es de 2 o más de diferencia, se habla de centenas de miles o millones de usuarios.</p>
+
+<p>A recordar: Un MVP no puede crecer indefinidamente, internamente se requieren
+cambios para satisfacer las necesidades(nuevas en tamaño o en objetivos).</p>
+
+<h2>Personal</h2>
+
+<p>Mantener una estructura sin demasiadas jerarquías y lo más plana posible es una de las metas fundamentales para que la comunicación sea efectiva y se eviten los teléfonos rotos.</p>
+
+<p>Que el equipo crezca y sea adaptable a las necesidades del producto requiere que haya un proceso claro de priorización y que las estimaciones y la confianza se mantenga para que las expectativas puedan estar en la realidad de la capacidad del equipo.</p>
+
+<p>Metáfora: Una mujer puede tener un hijo en 9 meses, pero 9 mujeres no pueden tener un hijo en un mes.</p>
+
+<h2>Cultura</h2>
+
+<p>Toda la empresa crece, finanzas, atención al cliente y las nuevas herramientas
+y servicios con los cuales se hace integraciones, así mismo el equipo de desarrollo y de producto deben crecer.</p>
+
+<p>Hacer cambios a un producto establecido desde la perspectiva de usuarios finales es uno de los retos más grandes que tiene el equipo de producto y requiere además del olfato, basarse en números para hacer priorizaciones adecuadas.</p>
+
+<p>Una campaña tuvo éxito? Cómo se midió? Si no fue el resultado, cuáles fueron las incidencias presentadas y las suposiciones que tenemos respecto a los objetivos que no logramos obtener.  Cómo mitigar el efecto en un próximo intento?</p>
+
+<p>Los equipos pequeños de desarrollo y con tareas específicas pueden ser más
+rápidos si tienen forma de comunicarse unos con otros, lo cual nos lleva al tema de la documentación que es uno en sí mismo.</p>
+
+<p>A recordar: Velocidad o Precisión, al principio con pocos usuarios es posible fallar, una operación de 24x7 requiere mantener estabilidad.</p>
+
+<h2>Documentación y automatización</h2>
+
+<p>Establecer las herramientas para que haya conocimiento organizacional en la profundidad que requiere cada área es otro reto a salvar, un sistema de gestión de calidad debe tener en cuenta que cada área es particular y las herramientas para cada una pueden variar para facilitar la actualización de la información y la visibilidad de la misma.</p>
+
+<p>A medida que crece el producto, se multiplican las integraciones y las reglas de negocio se van adaptando, estos cambios implican que lo que ya estaba estable no lo esté más, porque simplemente la carga cognitiva es tan grande que ya no cabe en la cabeza de una sola persona todos los aspectos que hay que tener en cuenta y porque la sensibilidad del sistema se ha disparado.</p>
+
+<p>Para mitigar las incidencias de una operación se tienen tres herramientas, en el siguiente orden:</p>
+
+<ol>
+<li>Identificar</li>
+<li>Documentar</li>
+<li>Automatizar</li>
+</ol>
+
+
+<p>Solamente tiene sentido automatizar un proceso si este se está repitiendo y la oportunidad de generar un fallo mayor al tratar de hacer el arreglo reviste peligro.  La automatización es una etapa posterior desde el ámbito de producto.</p>
+
+<p>Metáfora: Es mejor tener un lápiz muy gastado a una memoria muy grande.</p>
+
+<h2>Aspectos técnicos</h2>
+
+<p>Un sistema requiere:</p>
+
+<ul>
+<li>Programas: Lo mágico que funciona en los computadores</li>
+<li>Infraestructura: Los computadores sobre los que corre la magia</li>
+<li>Control de cambios: Las modificaciones y los nuevos rumbos de la magia</li>
+<li>Despliegue: Que la versión anterior sea cambiada por la nueva</li>
+<li>Administración de código y configuraciones: Que esto pueda seguir siendo creado por personas</li>
+<li>Ser medido: Si medimos, podemos tomar mejores decisiones y hacer más magia.</li>
+</ul>
+
+
+<p>Los programas se crean a partir de otras librerías y programas, con lo cual, el mantener las versiones actualizadas con las más estables se obtiene un sistema sano.  Y viene la temida deuda técnica a medida que los sistemas crecen.</p>
+
+<p>La deuda técnica se genera por:</p>
+
+<ul>
+<li>Hacer algo rápido para que funcione, a pesar de que se sabe que se puede hacer mejor.</li>
+<li>No contar con una cultura de mantenimiento de versiones recientes de las librerías o subsistemas.</li>
+<li>Trabajo de personas que pueden no estar al nivel de las necesidades o los cambios del ambiente.</li>
+<li>Cambio de prioridades.</li>
+<li>Cambio de requerimientos.</li>
+</ul>
+
+
+<p>Con lo cual, al principio es posible que la deuda técnica sea alta, esta es sostenible inicialmente.</p>
+
+<p>La deuda se puede mitigrar tomando tiempo para reescribir aquello que se sabe requiere mejoras.  Puede resultar mejor rehacer porciones del sistema desde cero y es un costo que está escondido.</p>
+
+<p>A recordar: Si la deuda técnica crece, la velocidad disminuye dramáticamente.</p>
+
+<h2>Referentes</h2>
+
+<ul>
+<li><a href="https://axiacore.com/blog/por-que-modificar-el-software-cuesta-tanto/">Metáfora de modificación</a></li>
+</ul>
+
+
+<h2>Créditos</h2>
+
+<p>Los dibujos fueron hechos en lápiz por Jesika Vanegas, quien gentilmente los
+preparó para esta publicación con su total autoría.</p>
+
+<h2>Preguntas</h2>
+
+<p>Hay conceptos que se volvieron demasiado técnicos en este escrito? Si es así, déjeme saber cuáles para lograr encontrar metáforas o analogías para hacerlo más claro.</p>
+]]></content>
+  </entry>
+  
+</feed>

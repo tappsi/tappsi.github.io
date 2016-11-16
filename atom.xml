@@ -1,118 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <title>Tappsi's Engineering and Technology Blog</title>
-  <meta name="author" content="Tappsi">
-
-  
-  <meta name="description" content="De un MVP a un producto, sobrevivir a los dos primeros años de una startup
-consiguiendo dinero de inversionistas y lograr que aquello que se &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <meta property="og:title" content="Tappsi's Engineering and Technology Blog" />
-  <meta property="og:type"   content="website" />
-  <meta property="og:url" content="" />
-  <meta property="og:image" content="/images/logo.jpg" />
-  <meta property="og:description" content="Pide tappsis seguros para tus clientes" />
-
-  
-  <link rel="canonical" href="http://tappsi.github.io/">
-  <link href="/favicon.ico" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="Tappsi's Engineering and Technology Blog" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-51798339-3']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
-
-</head>
-
-<body   >
-  <header role="banner"><hgroup>
-  <figure class="logo">
-    <a href="/">
-      <img src="/images/logo.jpg" title="Tappsi" alt="Tappsi">
-    </a>
-  </figure>
-  <h1><a href="/">Tappsi's Engineering and Technology Blog</a></h1>
-  
-    <h2>Taxi fácil y seguro en cualquier lugar.</h2>
-  
-  <div class="header_image_holder"></div>
-</hgroup>
-
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="https://www.google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="sitesearch" value="tappsi.github.io">
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-</ul>
-
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
-  
-  
-  
-    <article>
-      
-  <header>
+  <title><![CDATA[Tappsi's Engineering and Technology Blog]]></title>
+  <link href="http://tappsi.github.io/atom.xml" rel="self"/>
+  <link href="http://tappsi.github.io/"/>
+  <updated>2016-11-16T09:05:18-05:00</updated>
+  <id>http://tappsi.github.io/</id>
+  <author>
+    <name><![CDATA[Tappsi]]></name>
     
-      <h1 class="entry-title"><a href="/blog/2016/11/16/manejar-el-crecimiento/">Manejar El Crecimiento</a></h1>
-    
-    
-      <p class="meta">
-        
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
 
-
-
-
-<time class='entry-date' datetime='2016-11-16T06:56:01-05:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>6:56 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>De un MVP a un producto, sobrevivir a los dos primeros años de una startup
+  
+  <entry>
+    <title type="html"><![CDATA[Manejar El Crecimiento]]></title>
+    <link href="http://tappsi.github.io/blog/2016/11/16/manejar-el-crecimiento/"/>
+    <updated>2016-11-16T06:56:01-05:00</updated>
+    <id>http://tappsi.github.io/blog/2016/11/16/manejar-el-crecimiento</id>
+    <content type="html"><![CDATA[<p>De un MVP a un producto, sobrevivir a los dos primeros años de una startup
 consiguiendo dinero de inversionistas y lograr que aquello que se construyó
 con rapidez escale tiene retos organizacionales y técnicos, madurar y evolucionar, entender que esto conlleva a cambios de ritmos y escalamientos.</p>
 
@@ -129,7 +35,7 @@ rápidos y mostrar que efectivamente estas pruebas de concepto llegan a producci
 prueba de concepto es capaz de servir a una centena o miles de usuarios si se
 emplearon herramientas con un equipo pequeño y ágil.</p>
 
-<p><img src="/images/posts/managing-growth-mvp.jpg" title="ejemplo mínimo de graphviz" ></p>
+<p><img src="http://tappsi.github.io/images/posts/managing-growth-mvp.jpg" title="ejemplo mínimo de graphviz" ></p>
 
 <p>En ese momento lo que se logró fue crear una canoa que era muy rápida para
 cruzar ríos, el balance entre la estabilidad y la innovación está claramente
@@ -139,7 +45,7 @@ definido en el marco de presentaciones a los inversionistas.  La canoa puede ser
 sea capaz de mostrar el crecimiento y la estabilidad necesaria para que las
 personas que lo usan se sientan en una embarcación así:</p>
 
-<p><img src="/images/posts/managing-growth-goal.jpg" title="ejemplo mínimo de graphviz" ></p>
+<p><img src="http://tappsi.github.io/images/posts/managing-growth-goal.jpg" title="ejemplo mínimo de graphviz" ></p>
 
 <p>El único detalle es que ya los órdenes de magnitud en cantidad de usuarios es de 2 o más de diferencia, se habla de centenas de miles o millones de usuarios.</p>
 
@@ -235,35 +141,15 @@ preparó para esta publicación con su total autoría.</p>
 <h2>Preguntas</h2>
 
 <p>Hay conceptos que se volvieron demasiado técnicos en este escrito? Si es así, déjeme saber cuáles para lograr encontrar metáforas o analogías para hacerlo más claro.</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/04/07/versioned-graphs/">Gráficas Versionadas</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-04-07T15:33:44-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>3:33 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Mis habilidades gráficas y sentido artístico están por
+  <entry>
+    <title type="html"><![CDATA[Gráficas Versionadas]]></title>
+    <link href="http://tappsi.github.io/blog/2016/04/07/versioned-graphs/"/>
+    <updated>2016-04-07T15:33:44-05:00</updated>
+    <id>http://tappsi.github.io/blog/2016/04/07/versioned-graphs</id>
+    <content type="html"><![CDATA[<p>Mis habilidades gráficas y sentido artístico están por
 debajo de la media y dado que no aprendí ni me gusta
 dibujar y que uso sistemas de manejo de versiones para
 mi trabajo diario, hay una opción para generar gráficas
@@ -279,7 +165,7 @@ hacer la edición.</p>
 
 <p>Por ejemplo, para hacer una gráfica como la siguiente:</p>
 
-<p><img src="/images/posts/graphviz-simple-diagram.png" title="ejemplo mínimo de graphviz" ></p>
+<p><img src="http://tappsi.github.io/images/posts/graphviz-simple-diagram.png" title="ejemplo mínimo de graphviz" ></p>
 
 <p>Se escribe:</p>
 
@@ -303,41 +189,21 @@ hacer la edición.</p>
 continua de procesos tiene todo el sentido contar con ella.</p>
 
 <p>¿Ha encontrado otras soluciones que sean sencillas y permitan algo similar?</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/03/18/formulario-de-busqueda-en-flask/">Formulario De Búsqueda en Flask</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-03-18T10:19:28-05:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>10:19 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>En <a href="/blog/2016/03/18/listview-en-flask">la entrada anterior</a> hicimos un <code>ListView</code>
+  <entry>
+    <title type="html"><![CDATA[Formulario De Búsqueda en Flask]]></title>
+    <link href="http://tappsi.github.io/blog/2016/03/18/formulario-de-busqueda-en-flask/"/>
+    <updated>2016-03-18T10:19:28-05:00</updated>
+    <id>http://tappsi.github.io/blog/2016/03/18/formulario-de-busqueda-en-flask</id>
+    <content type="html"><![CDATA[<p>En <a href="http://tappsi.github.io/blog/2016/03/18/listview-en-flask">la entrada anterior</a> hicimos un <code>ListView</code>
 para mostrar un listado de objetos que pertenecen a un modelo específico.</p>
 
 <p>Ahora miramos cómo agregar un formulario de búsqueda, para que nuestro usuario
 pueda filtrar los objetos por sus campos:</p>
 
-<p><img src="/images/posts/passengers-search-form.png" title="Listado de pasajeros con formulario de búsqueda" ></p>
+<p><img src="http://tappsi.github.io/images/posts/passengers-search-form.png" title="Listado de pasajeros con formulario de búsqueda" ></p>
 
 <p>Extendemos la clase <code>ListView</code>, agregando el atributo que se refiere al formulario de búsqueda
 (<code>search_form</code>) y un método que genera una petición de SQLAlchemy a partir de los campos del formulario:</p>
@@ -457,7 +323,7 @@ pueda filtrar los objetos por sus campos:</p>
 
 
 <p>La versión completa de <code>ListView</code> junto con la vista de ejemplo
-se puede encontrar aquí: <a href="/blog/2016/03/18/listview-en-flask">ListView en Flask</a>.</p>
+se puede encontrar aquí: <a href="http://tappsi.github.io/blog/2016/03/18/listview-en-flask">ListView en Flask</a>.</p>
 
 <p>El el siguiente paso agregamos un formulario de búsqueda a nuesra vista:</p>
 
@@ -516,7 +382,7 @@ se puede encontrar aquí: <a href="/blog/2016/03/18/listview-en-flask">ListView 
 
 
 <p>Para que la búsqueda funcione, los campos del formulario deben coincidir con los campos
-del modelo <code>Passenger</code> (<a href="/blog/2016/03/18/listview-en-flask">ver el modelo</a>),
+del modelo <code>Passenger</code> (<a href="http://tappsi.github.io/blog/2016/03/18/listview-en-flask">ver el modelo</a>),
 acompañados con operadores de comparación de SQLAlchemy:</p>
 
 <pre><code>eq para ==
@@ -593,35 +459,15 @@ ilike
 
 <p>En este ejemplo usamos <a href="https://pythonhosted.org/Flask-Bootstrap/forms.html">Flask-Bootstrap</a>
 para renderizar los formularios con las clases de <a href="http://getbootstrap.com/">Bootstrap</a>.</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/03/18/listview-en-flask/">ListView en Flask</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-03-18T09:26:50-05:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>9:26 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Muchos de nosotros, pasando de Django a Flask, extrañamos las vistas basadas en clases (CBV).</p>
+  <entry>
+    <title type="html"><![CDATA[ListView en Flask]]></title>
+    <link href="http://tappsi.github.io/blog/2016/03/18/listview-en-flask/"/>
+    <updated>2016-03-18T09:26:50-05:00</updated>
+    <id>http://tappsi.github.io/blog/2016/03/18/listview-en-flask</id>
+    <content type="html"><![CDATA[<p>Muchos de nosotros, pasando de Django a Flask, extrañamos las vistas basadas en clases (CBV).</p>
 
 <p>Vamos a hacer un <code>ListView</code> que nos ayude a crear listados de objetos, generados
 a partir de un modelo específico.</p>
@@ -925,173 +771,8 @@ página (<code>paginate_by</code> o en la configuracón de nuestra aplicación
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Lee más acerca de cómo agregar un formulario de búsqueda a tu lista: <a href="/blog/2016/03/18/formulario-de-busqueda-en-flask">Formulario de búsqueda en Flask</a></p>
-</div>
+<p>Lee más acerca de cómo agregar un formulario de búsqueda a tu lista: <a href="http://tappsi.github.io/blog/2016/03/18/formulario-de-busqueda-en-flask">Formulario de búsqueda en Flask</a></p>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
-<aside class="sidebar">
-  
-    <section>
-  <h1>About Tappsi</h1>
-  <p>
-    <a href="https://tappsi.co/" target="_blank">Tappsi</a> is an e-hailing mobile app conceived for Latin American cities.
-    Launched in Bogota in 2012, Tappsi has reached over one million users and
-    great traction among the taxi drivers in just a few months.
-    Currently available in nine cities in Colombia: Armenia, Barranquilla, Bogotá, Bucaramanga, Cali, Cartagena, Manizales, Medellín and 
-    Pereira.
-    Tappsi is on track to establish itself as the market leader in Colombia,
-    and take our in-depth knowledge (of the the Latin American taxi driver and
-    passenger) and know-how to other key Latin American cities which are in need of a solution as Tappsi.
-  </p>
-</section>
-<section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2016/11/16/manejar-el-crecimiento/">Manejar El Crecimiento</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/04/07/versioned-graphs/">Gráficas Versionadas</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/03/18/formulario-de-busqueda-en-flask/">Formulario De Búsqueda en Flask</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/03/18/listview-en-flask/">ListView en Flask</a>
-      </li>
-    
-  </ul>
-</section>
-
-<section class="twitterOct">
-  <h1 style="margin-bottom: 0.4em"> Tweets </h1>
-  <a class="twitter-timeline"
-	 data-dnt="true" href="https://twitter.com/tappsico"
-     data-widget-id="710846092263428096">
-
-     Tweets by @tappsico
-  </a>
-  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-</section>
-
-
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating...</li>
-  </ul>
-  
-  <a href="https://github.com/tappsi">@tappsi</a> on GitHub
-  
-  <script type="text/javascript">
-    $(document).ready(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'tappsi',
-            count: 0,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-<section class="googleplus">
-  <h1>
-    <a href="https://plus.google.com/+TappsiCo?rel=author">
-      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
-      Google+
-    </a>
-  </h1>
-</section>
-
-
-
-  
-</aside>
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2016 - Tappsi -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-</footer>
-  
-
-<script type="text/javascript">
-      var disqus_shortname = 'tappsitechblog';
-      
-        
-        var disqus_script = 'count.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
-
-
-
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id; js.async = true;
-  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
-
-
-  <script type="text/javascript">
-    (function() {
-      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
-      script.src = 'https://apis.google.com/js/plusone.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
-    })();
-  </script>
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
-
-
-
-</body>
-</html>
+</feed>
