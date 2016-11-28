@@ -9,8 +9,7 @@
   <meta name="author" content="Tappsi">
 
   
-  <meta name="description" content="De un MVP a un producto, sobrevivir a los dos primeros años de una startup
-consiguiendo dinero de inversionistas y lograr que aquello que se &hellip;">
+  <meta name="description" content="En nuestro ejemplo tenemos información acerca de velocidades (km/h) para cada sector de nuestra ciudad representado por un geohash: geohashes.json 1 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -90,6 +89,220 @@ consiguiendo dinero de inversionistas y lograr que aquello que se &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/11/28/como-pintar-poligonos-en-mapbox-usando-geohashes/">Cómo Pintar Polígonos en Mapbox Usando Geohashes</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-11-28T11:16:14-05:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>11:16 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>En nuestro ejemplo tenemos información acerca de velocidades (<em>km/h</em>) para cada sector de nuestra ciudad representado por un geohash:</p>
+
+<figure class='code'><figcaption><span>geohashes.json </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="nt">&quot;d2g62s&quot;</span><span class="p">:</span> <span class="mf">18.0</span><span class="p">,</span>
+</span><span class='line'>    <span class="nt">&quot;d2g68c&quot;</span><span class="p">:</span> <span class="mf">36.33</span><span class="p">,</span>
+</span><span class='line'>    <span class="nt">&quot;d2g74k&quot;</span><span class="p">:</span> <span class="mf">21.32</span>
+</span><span class='line'>    <span class="err">//</span> <span class="err">etc.</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Lo primero que vamos a hacer, es obtener las coordinadas de los sectores a partir de la cadena de geohash. Para esto vamos a usar una librería de Python llamanda <a href="https://github.com/hkwi/python-geohash">python-geohash</a>. Usando el método <code>bbox</code> de ésta librería, podemos potener las coordinadas de los puntos extremos:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;</span> <span class="kn">import</span> <span class="nn">geohash</span>
+</span><span class='line'><span class="o">&gt;</span> <span class="n">gh</span> <span class="o">=</span> <span class="n">geohash</span><span class="o">.</span><span class="n">bbox</span><span class="p">(</span><span class="s">&#39;d2g628&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span><span class="s">&#39;e&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">74.146728515625</span><span class="p">,</span>
+</span><span class='line'> <span class="s">&#39;n&#39;</span><span class="p">:</span> <span class="mf">4.6197509765625</span><span class="p">,</span>
+</span><span class='line'> <span class="s">&#39;s&#39;</span><span class="p">:</span> <span class="mf">4.6142578125</span><span class="p">,</span>
+</span><span class='line'> <span class="s">&#39;w&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">74.15771484375</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>donde <code>n</code> es el norte, <code>s</code> - el sur,  <code>w</code> - el oeste y <code>e</code> es el este. Entonces los puntos serán <code>(-74.15771484375, 4.6197509765625)</code>, <code>(-74.146728515625, 4.6197509765625)</code>, <code>(-74.14672851562, 4.6142578125)</code> y <code>(-74.15771484375, 4.6142578125)</code>.</p>
+
+<p>Ahora construimos una vista (en éste ejemplo usamos Flask) para devolver un <a href="http://leafletjs.com/examples/geojson/">GeoJSON</a>, que vamos a consumir desde el código JavaScript.</p>
+
+<figure class='code'><figcaption><span>views.py </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">geohash</span>
+</span><span class='line'>
+</span><span class='line'><span class="nd">@main.route</span><span class="p">(</span><span class="s">&#39;/maps/speeds-map-data&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">speeds_map_data</span><span class="p">():</span>
+</span><span class='line'>    <span class="n">features</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span class='line'>    <span class="n">speeds_hash</span> <span class="o">=</span> <span class="n">get_speeds_json</span><span class="p">()</span>
+</span><span class='line'>    <span class="k">for</span> <span class="nb">hash</span><span class="p">,</span> <span class="n">speed</span> <span class="ow">in</span> <span class="n">speeds_hash</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+</span><span class='line'>        <span class="n">gh</span> <span class="o">=</span> <span class="n">geohash</span><span class="o">.</span><span class="n">bbox</span><span class="p">(</span><span class="nb">hash</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">features</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+</span><span class='line'>            <span class="s">&#39;type&#39;</span><span class="p">:</span> <span class="s">&#39;Feature&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="s">&#39;properties&#39;</span><span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>                <span class="s">&#39;popupContent&#39;</span><span class="p">:</span> <span class="s">&#39;{} km/h&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">speed</span><span class="p">),</span>
+</span><span class='line'>                <span class="s">&#39;style&#39;</span><span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>                    <span class="s">&#39;weight&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+</span><span class='line'>                    <span class="s">&#39;color&#39;</span><span class="p">:</span> <span class="s">&quot;#999&quot;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="s">&#39;opacity&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'>                    <span class="s">&#39;fillColor&#39;</span><span class="p">:</span> <span class="n">color</span><span class="p">,</span>
+</span><span class='line'>                    <span class="s">&#39;fillOpacity&#39;</span><span class="p">:</span> <span class="mf">0.7</span>
+</span><span class='line'>                <span class="p">},</span>
+</span><span class='line'>            <span class="p">},</span>
+</span><span class='line'>            <span class="s">&#39;geometry&#39;</span><span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>                <span class="s">&#39;type&#39;</span><span class="p">:</span> <span class="s">&#39;Polygon&#39;</span><span class="p">,</span>
+</span><span class='line'>                <span class="s">&#39;coordinates&#39;</span><span class="p">:</span> <span class="p">[[</span>
+</span><span class='line'>                    <span class="p">[</span><span class="n">gh</span><span class="p">[</span><span class="s">&#39;w&#39;</span><span class="p">],</span> <span class="n">gh</span><span class="p">[</span><span class="s">&#39;n&#39;</span><span class="p">]],</span> <span class="p">[</span><span class="n">gh</span><span class="p">[</span><span class="s">&#39;e&#39;</span><span class="p">],</span> <span class="n">gh</span><span class="p">[</span><span class="s">&#39;n&#39;</span><span class="p">]],</span>
+</span><span class='line'>                    <span class="p">[</span><span class="n">gh</span><span class="p">[</span><span class="s">&#39;e&#39;</span><span class="p">],</span> <span class="n">gh</span><span class="p">[</span><span class="s">&#39;s&#39;</span><span class="p">]],</span> <span class="p">[</span><span class="n">gh</span><span class="p">[</span><span class="s">&#39;w&#39;</span><span class="p">],</span> <span class="n">gh</span><span class="p">[</span><span class="s">&#39;s&#39;</span><span class="p">]],</span>
+</span><span class='line'>                <span class="p">]]</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>        <span class="p">})</span>
+</span><span class='line'>    <span class="n">response</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>        <span class="s">&#39;type&#39;</span><span class="p">:</span> <span class="s">&#39;FeatureCollection&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s">&#39;features&#39;</span><span class="p">:</span> <span class="n">features</span><span class="p">,</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ahora nos falta sólo crear la plantilla HTML</p>
+
+<figure class='code'><figcaption><span>map.html </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;map&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>y el archivo JavaScript para crear el mapa y obrener los datos de nuestra vista:</p>
+
+<figure class='code'><figcaption><span>map.js </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="s1">&#39;use strict&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">L</span><span class="p">.</span><span class="nx">mapbox</span><span class="p">.</span><span class="nx">accessToken</span> <span class="o">=</span> <span class="s1">&#39;YOUR_MAPBOX_ACCESS_TOKEN&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// Crear un mapa, especificando el centro y zoom</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">map</span> <span class="o">=</span> <span class="nx">L</span><span class="p">.</span><span class="nx">mapbox</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="s1">&#39;map&#39;</span><span class="p">,</span> <span class="s1">&#39;mapbox.streets&#39;</span><span class="p">).</span><span class="nx">setView</span><span class="p">([</span><span class="mf">4.66336863727521</span><span class="p">,</span> <span class="o">-</span><span class="mf">74.07231699675322</span><span class="p">],</span> <span class="mi">12</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// Obtener el GeoJSON de nuestra vista</span>
+</span><span class='line'>  <span class="nx">$</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/maps/speeds-map-data&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">L</span><span class="p">.</span><span class="nx">geoJson</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">style</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">feature</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="nx">feature</span><span class="p">.</span><span class="nx">properties</span><span class="p">.</span><span class="nx">style</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">},</span>
+</span><span class='line'>      <span class="nx">onEachFeature</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">feature</span><span class="p">,</span> <span class="nx">layer</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="c1">// Mostrar un pop-up con la velocidad mara cada sector</span>
+</span><span class='line'>        <span class="kd">var</span> <span class="nx">popupContent</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="nx">feature</span><span class="p">.</span><span class="nx">properties</span> <span class="o">&amp;&amp;</span> <span class="nx">feature</span><span class="p">.</span><span class="nx">properties</span><span class="p">.</span><span class="nx">popupContent</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="nx">popupContent</span> <span class="o">+=</span> <span class="nx">feature</span><span class="p">.</span><span class="nx">properties</span><span class="p">.</span><span class="nx">popupContent</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>        <span class="nx">layer</span><span class="p">.</span><span class="nx">bindPopup</span><span class="p">(</span><span class="nx">popupContent</span><span class="p">);</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>    <span class="p">}).</span><span class="nx">addTo</span><span class="p">(</span><span class="nx">map</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Y voilà: podemos mostrar un mapa de calor a nuestros usuarios:</p>
+
+<p><img src="/images/posts/mapbox_polygons.png" title="Polígonos" ></p>
+
+<h2>Referentes</h2>
+
+<ul>
+<li><a href="http://leafletjs.com/examples/geojson/">Using GeoJSON with Leaflet</a></li>
+<li><a href="http://geojson.org/geojson-spec.html">The GeoJSON Format Specification</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -957,6 +1170,10 @@ página (<code>paginate_by</code> o en la configuracón de nuestra aplicación
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/11/28/como-pintar-poligonos-en-mapbox-usando-geohashes/">Cómo Pintar Polígonos en Mapbox Usando Geohashes</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/11/16/manejar-el-crecimiento/">Manejar El Crecimiento</a>

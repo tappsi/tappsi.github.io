@@ -1,0 +1,517 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Cómo Pintar Polígonos en Mapbox Usando Geohashes - Tappsi's Engineering and Technology Blog</title>
+  <meta name="author" content="Tappsi">
+
+  
+  <meta name="description" content="En nuestro ejemplo tenemos información acerca de velocidades (km/h) para cada sector de nuestra ciudad representado por un geohash: geohashes.json 1 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:title" content="Cómo Pintar Polígonos en Mapbox Usando Geohashes - Tappsi's Engineering and Technology Blog" />
+  <meta property="og:type"   content="website" />
+  <meta property="og:url" content="" />
+  <meta property="og:image" content="/images/logo.jpg" />
+  <meta property="og:description" content="Pide tappsis seguros para tus clientes" />
+
+  
+  <link rel="canonical" href="http://tappsi.github.io/blog/2016/11/28/como-pintar-poligonos-en-mapbox-usando-geohashes/">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Tappsi's Engineering and Technology Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-51798339-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <figure class="logo">
+    <a href="/">
+      <img src="/images/logo.jpg" title="Tappsi" alt="Tappsi">
+    </a>
+  </figure>
+  <h1><a href="/">Tappsi's Engineering and Technology Blog</a></h1>
+  
+    <h2>Taxi fácil y seguro en cualquier lugar.</h2>
+  
+  <div class="header_image_holder"></div>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="tappsi.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Cómo Pintar Polígonos en Mapbox Usando Geohashes</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-11-28T11:16:14-05:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>11:16 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>En nuestro ejemplo tenemos información acerca de velocidades (<em>km/h</em>) para cada sector de nuestra ciudad representado por un geohash:</p>
+
+<figure class='code'><figcaption><span>geohashes.json </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="nt">&quot;d2g62s&quot;</span><span class="p">:</span> <span class="mf">18.0</span><span class="p">,</span>
+</span><span class='line'>    <span class="nt">&quot;d2g68c&quot;</span><span class="p">:</span> <span class="mf">36.33</span><span class="p">,</span>
+</span><span class='line'>    <span class="nt">&quot;d2g74k&quot;</span><span class="p">:</span> <span class="mf">21.32</span>
+</span><span class='line'>    <span class="err">//</span> <span class="err">etc.</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Lo primero que vamos a hacer, es obtener las coordinadas de los sectores a partir de la cadena de geohash. Para esto vamos a usar una librería de Python llamanda <a href="https://github.com/hkwi/python-geohash">python-geohash</a>. Usando el método <code>bbox</code> de ésta librería, podemos potener las coordinadas de los puntos extremos:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;</span> <span class="kn">import</span> <span class="nn">geohash</span>
+</span><span class='line'><span class="o">&gt;</span> <span class="n">gh</span> <span class="o">=</span> <span class="n">geohash</span><span class="o">.</span><span class="n">bbox</span><span class="p">(</span><span class="s">&#39;d2g628&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span><span class="s">&#39;e&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">74.146728515625</span><span class="p">,</span>
+</span><span class='line'> <span class="s">&#39;n&#39;</span><span class="p">:</span> <span class="mf">4.6197509765625</span><span class="p">,</span>
+</span><span class='line'> <span class="s">&#39;s&#39;</span><span class="p">:</span> <span class="mf">4.6142578125</span><span class="p">,</span>
+</span><span class='line'> <span class="s">&#39;w&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">74.15771484375</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>donde <code>n</code> es el norte, <code>s</code> - el sur,  <code>w</code> - el oeste y <code>e</code> es el este. Entonces los puntos serán <code>(-74.15771484375, 4.6197509765625)</code>, <code>(-74.146728515625, 4.6197509765625)</code>, <code>(-74.14672851562, 4.6142578125)</code> y <code>(-74.15771484375, 4.6142578125)</code>.</p>
+
+<p>Ahora construimos una vista (en éste ejemplo usamos Flask) para devolver un <a href="http://leafletjs.com/examples/geojson/">GeoJSON</a>, que vamos a consumir desde el código JavaScript.</p>
+
+<figure class='code'><figcaption><span>views.py </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">geohash</span>
+</span><span class='line'>
+</span><span class='line'><span class="nd">@main.route</span><span class="p">(</span><span class="s">&#39;/maps/speeds-map-data&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">speeds_map_data</span><span class="p">():</span>
+</span><span class='line'>    <span class="n">features</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span class='line'>    <span class="n">speeds_hash</span> <span class="o">=</span> <span class="n">get_speeds_json</span><span class="p">()</span>
+</span><span class='line'>    <span class="k">for</span> <span class="nb">hash</span><span class="p">,</span> <span class="n">speed</span> <span class="ow">in</span> <span class="n">speeds_hash</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+</span><span class='line'>        <span class="n">gh</span> <span class="o">=</span> <span class="n">geohash</span><span class="o">.</span><span class="n">bbox</span><span class="p">(</span><span class="nb">hash</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">features</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+</span><span class='line'>            <span class="s">&#39;type&#39;</span><span class="p">:</span> <span class="s">&#39;Feature&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="s">&#39;properties&#39;</span><span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>                <span class="s">&#39;popupContent&#39;</span><span class="p">:</span> <span class="s">&#39;{} km/h&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">speed</span><span class="p">),</span>
+</span><span class='line'>                <span class="s">&#39;style&#39;</span><span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>                    <span class="s">&#39;weight&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+</span><span class='line'>                    <span class="s">&#39;color&#39;</span><span class="p">:</span> <span class="s">&quot;#999&quot;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="s">&#39;opacity&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'>                    <span class="s">&#39;fillColor&#39;</span><span class="p">:</span> <span class="n">color</span><span class="p">,</span>
+</span><span class='line'>                    <span class="s">&#39;fillOpacity&#39;</span><span class="p">:</span> <span class="mf">0.7</span>
+</span><span class='line'>                <span class="p">},</span>
+</span><span class='line'>            <span class="p">},</span>
+</span><span class='line'>            <span class="s">&#39;geometry&#39;</span><span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>                <span class="s">&#39;type&#39;</span><span class="p">:</span> <span class="s">&#39;Polygon&#39;</span><span class="p">,</span>
+</span><span class='line'>                <span class="s">&#39;coordinates&#39;</span><span class="p">:</span> <span class="p">[[</span>
+</span><span class='line'>                    <span class="p">[</span><span class="n">gh</span><span class="p">[</span><span class="s">&#39;w&#39;</span><span class="p">],</span> <span class="n">gh</span><span class="p">[</span><span class="s">&#39;n&#39;</span><span class="p">]],</span> <span class="p">[</span><span class="n">gh</span><span class="p">[</span><span class="s">&#39;e&#39;</span><span class="p">],</span> <span class="n">gh</span><span class="p">[</span><span class="s">&#39;n&#39;</span><span class="p">]],</span>
+</span><span class='line'>                    <span class="p">[</span><span class="n">gh</span><span class="p">[</span><span class="s">&#39;e&#39;</span><span class="p">],</span> <span class="n">gh</span><span class="p">[</span><span class="s">&#39;s&#39;</span><span class="p">]],</span> <span class="p">[</span><span class="n">gh</span><span class="p">[</span><span class="s">&#39;w&#39;</span><span class="p">],</span> <span class="n">gh</span><span class="p">[</span><span class="s">&#39;s&#39;</span><span class="p">]],</span>
+</span><span class='line'>                <span class="p">]]</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>        <span class="p">})</span>
+</span><span class='line'>    <span class="n">response</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>        <span class="s">&#39;type&#39;</span><span class="p">:</span> <span class="s">&#39;FeatureCollection&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s">&#39;features&#39;</span><span class="p">:</span> <span class="n">features</span><span class="p">,</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ahora nos falta sólo crear la plantilla HTML</p>
+
+<figure class='code'><figcaption><span>map.html </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;map&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>y el archivo JavaScript para crear el mapa y obrener los datos de nuestra vista:</p>
+
+<figure class='code'><figcaption><span>map.js </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="s1">&#39;use strict&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">L</span><span class="p">.</span><span class="nx">mapbox</span><span class="p">.</span><span class="nx">accessToken</span> <span class="o">=</span> <span class="s1">&#39;YOUR_MAPBOX_ACCESS_TOKEN&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// Crear un mapa, especificando el centro y zoom</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">map</span> <span class="o">=</span> <span class="nx">L</span><span class="p">.</span><span class="nx">mapbox</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="s1">&#39;map&#39;</span><span class="p">,</span> <span class="s1">&#39;mapbox.streets&#39;</span><span class="p">).</span><span class="nx">setView</span><span class="p">([</span><span class="mf">4.66336863727521</span><span class="p">,</span> <span class="o">-</span><span class="mf">74.07231699675322</span><span class="p">],</span> <span class="mi">12</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// Obtener el GeoJSON de nuestra vista</span>
+</span><span class='line'>  <span class="nx">$</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/maps/speeds-map-data&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">L</span><span class="p">.</span><span class="nx">geoJson</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">style</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">feature</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="nx">feature</span><span class="p">.</span><span class="nx">properties</span><span class="p">.</span><span class="nx">style</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">},</span>
+</span><span class='line'>      <span class="nx">onEachFeature</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">feature</span><span class="p">,</span> <span class="nx">layer</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="c1">// Mostrar un pop-up con la velocidad mara cada sector</span>
+</span><span class='line'>        <span class="kd">var</span> <span class="nx">popupContent</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="nx">feature</span><span class="p">.</span><span class="nx">properties</span> <span class="o">&amp;&amp;</span> <span class="nx">feature</span><span class="p">.</span><span class="nx">properties</span><span class="p">.</span><span class="nx">popupContent</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="nx">popupContent</span> <span class="o">+=</span> <span class="nx">feature</span><span class="p">.</span><span class="nx">properties</span><span class="p">.</span><span class="nx">popupContent</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>        <span class="nx">layer</span><span class="p">.</span><span class="nx">bindPopup</span><span class="p">(</span><span class="nx">popupContent</span><span class="p">);</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>    <span class="p">}).</span><span class="nx">addTo</span><span class="p">(</span><span class="nx">map</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Y voilà: podemos mostrar un mapa de calor a nuestros usuarios:</p>
+
+<p><img src="/images/posts/mapbox_polygons.png" title="Polígonos" ></p>
+
+<h2>Referentes</h2>
+
+<ul>
+<li><a href="http://leafletjs.com/examples/geojson/">Using GeoJSON with Leaflet</a></li>
+<li><a href="http://geojson.org/geojson-spec.html">The GeoJSON Format Specification</a></li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Vera Mazhuga</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2016-11-28T11:16:14-05:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>11:16 am</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/geohash/'>geohash</a>, <a class='category' href='/blog/categories/javascript/'>javascript</a>, <a class='category' href='/blog/categories/mapbox/'>mapbox</a>, <a class='category' href='/blog/categories/maps/'>maps</a>, <a class='category' href='/blog/categories/python/'>python</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://tappsi.github.io/blog/2016/11/28/como-pintar-poligonos-en-mapbox-usando-geohashes/" data-via="tappsico" data-counturl="http://tappsi.github.io/blog/2016/11/28/como-pintar-poligonos-en-mapbox-usando-geohashes/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2016/11/16/manejar-el-crecimiento/" title="Previous Post: Manejar el crecimiento">&laquo; Manejar el crecimiento</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Tappsi</h1>
+  <p>
+    <a href="https://tappsi.co/" target="_blank">Tappsi</a> is an e-hailing mobile app conceived for Latin American cities.
+    Launched in Bogota in 2012, Tappsi has reached over one million users and
+    great traction among the taxi drivers in just a few months.
+    Currently available in nine cities in Colombia: Armenia, Barranquilla, Bogotá, Bucaramanga, Cali, Cartagena, Manizales, Medellín and 
+    Pereira.
+    Tappsi is on track to establish itself as the market leader in Colombia,
+    and take our in-depth knowledge (of the the Latin American taxi driver and
+    passenger) and know-how to other key Latin American cities which are in need of a solution as Tappsi.
+  </p>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/11/28/como-pintar-poligonos-en-mapbox-usando-geohashes/">Cómo Pintar Polígonos en Mapbox Usando Geohashes</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/11/16/manejar-el-crecimiento/">Manejar El Crecimiento</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/04/07/versioned-graphs/">Gráficas Versionadas</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/03/18/formulario-de-busqueda-en-flask/">Formulario De Búsqueda en Flask</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/03/18/listview-en-flask/">ListView en Flask</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section class="twitterOct">
+  <h1 style="margin-bottom: 0.4em"> Tweets </h1>
+  <a class="twitter-timeline"
+	 data-dnt="true" href="https://twitter.com/tappsico"
+     data-widget-id="710846092263428096">
+
+     Tweets by @tappsico
+  </a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/tappsi">@tappsi</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'tappsi',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/+TappsiCo?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Tappsi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tappsitechblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tappsi.github.io/blog/2016/11/28/como-pintar-poligonos-en-mapbox-usando-geohashes/';
+        var disqus_url = 'http://tappsi.github.io/blog/2016/11/28/como-pintar-poligonos-en-mapbox-usando-geohashes/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
