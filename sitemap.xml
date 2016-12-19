@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://tappsi.github.io/blog/2016/12/19/como-hacer-un-repositorio-de-python-instalable/</loc>
+<lastmod>2016-12-19T16:11:27-05:00</lastmod>
+</url>
+<url>
 <loc>http://tappsi.github.io/blog/2016/11/28/como-pintar-poligonos-en-mapbox-usando-geohashes/</loc>
 <lastmod>2016-11-28T11:16:14-05:00</lastmod>
 </url>
@@ -49,5 +53,11 @@
 </url>
 <url>
 <loc>http://tappsi.github.io/blog/categories/geohash/</loc>
+</url>
+<url>
+<loc>http://tappsi.github.io/blog/categories/pip/</loc>
+</url>
+<url>
+<loc>http://tappsi.github.io/blog/categories/github/</loc>
 </url>
 </urlset>

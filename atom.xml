@@ -4,7 +4,7 @@
   <title><![CDATA[Tappsi's Engineering and Technology Blog]]></title>
   <link href="http://tappsi.github.io/atom.xml" rel="self"/>
   <link href="http://tappsi.github.io/"/>
-  <updated>2016-11-28T13:52:04-05:00</updated>
+  <updated>2016-12-19T16:39:12-05:00</updated>
   <id>http://tappsi.github.io/</id>
   <author>
     <name><![CDATA[Tappsi]]></name>
@@ -12,6 +12,88 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Cómo Hacer Un Repositorio De Python Instalable]]></title>
+    <link href="http://tappsi.github.io/blog/2016/12/19/como-hacer-un-repositorio-de-python-instalable/"/>
+    <updated>2016-12-19T16:11:27-05:00</updated>
+    <id>http://tappsi.github.io/blog/2016/12/19/como-hacer-un-repositorio-de-python-instalable</id>
+    <content type="html"><![CDATA[<p>A veces, cuando trabajamos con Python y tenemos varios repositorios privados, surge la necesidad de compartir código entre ellos. En ésta entrada vamos a ver cómo hacer un repositorio privado de Python y poder instalarlo usando el sistema de gestión de paquetes <code>pip</code>.</p>
+
+<p>Primero creamos un repositorio en GitHub con el código de Python que queremos usar en proyectos diferentes. Decimos que nuestro repositorio tenga el url</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>https://github.com/tappsi/python_repo</span></code></pre></td></tr></table></div></figure>
+
+
+<p>y los siguientes archivos:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>|-- tappsi_constants
+</span><span class='line'>|   `-- __init__.py
+</span><span class='line'>|-- .gitignore
+</span><span class='line'>|-- README.md
+</span><span class='line'>`-- setup.py</span></code></pre></td></tr></table></div></figure>
+
+
+<p>En el módulo <code>tappsi_constants</code> vamos a colocar nuestro código, y <code>setup.py</code> va a tener la siguiente estructura:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">setup</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">setup</span><span class="p">(</span>
+</span><span class='line'>    <span class="n">name</span><span class="o">=</span><span class="s">&#39;python_repo&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">version</span><span class="o">=</span><span class="s">&#39;0.1&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">author</span><span class="o">=</span><span class="s">&#39;J. Random Hacker&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">author_email</span><span class="o">=</span><span class="s">&#39;info@example.co&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">packages</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;tappsi_constants&#39;</span><span class="p">],</span>
+</span><span class='line'>    <span class="n">description</span><span class="o">=</span><span class="s">&#39;Constants used across python projects.&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">long_description</span><span class="o">=</span><span class="nb">open</span><span class="p">(</span><span class="s">&#39;README.md&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span>
+</span><span class='line'>    <span class="n">install_requires</span><span class="o">=</span><span class="p">[</span>
+</span><span class='line'>        <span class="s">&quot;six &gt;= 1.10.0&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="p">],</span>
+</span><span class='line'><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Haremos un commit de nuestro repositorio y crearemos una etiqueta que corresponde a la versión del paquete:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git commit -m <span class="s2">&quot;First commit&quot;</span>
+</span><span class='line'>git tag v0.1
+</span><span class='line'>git push --tags
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ahora podemos usar el repositorio como un paquete de python, colocando la siguiente linea en <code>requirements.txt</code> de otros proyectos</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>pip install git+ssh://git@github.com/tappsi/python_repo.git@v0.1
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Cómo Pintar Polígonos en Mapbox Usando Geohashes]]></title>
