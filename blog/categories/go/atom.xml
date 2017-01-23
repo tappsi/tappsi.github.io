@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Go | Tappsi's Engineering and Technology Blog]]></title>
   <link href="http://tappsi.github.io/blog/categories/go/atom.xml" rel="self"/>
   <link href="http://tappsi.github.io/"/>
-  <updated>2017-01-23T10:29:08-05:00</updated>
+  <updated>2017-01-23T10:47:42-05:00</updated>
   <id>http://tappsi.github.io/</id>
   <author>
     <name><![CDATA[Tappsi]]></name>
@@ -22,7 +22,7 @@
 
 <p>This is a very common need, so we decided to implement a microservice for it that can be reused by other projects. We chose to write it in Go to show the usage of several high-performance Go libraries and frameworks, and to demonstrate how to send messages to a RabbitMQ exchange using a connection pool.</p>
 
-<p>The best part is that this is an open source project! Feel free to download and use it in your own applications:</p>
+<p>Our Airbrake webhook has been deployed in production for the past 6 months at the time of writing, working without a hitch. The best part is that this is an open source project! Feel free to download and use it in your own applications:</p>
 
 <p><a href="https://github.com/tappsi/airbrake-webhook">https://github.com/tappsi/airbrake-webhook</a></p>
 
