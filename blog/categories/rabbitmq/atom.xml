@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Rabbitmq | Tappsi's Engineering and Technology Blog]]></title>
+  <link href="http://tappsi.github.io/blog/categories/rabbitmq/atom.xml" rel="self"/>
+  <link href="http://tappsi.github.io/"/>
+  <updated>2017-01-23T10:29:08-05:00</updated>
+  <id>http://tappsi.github.io/</id>
+  <author>
+    <name><![CDATA[Tappsi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[An Airbrake Webhook in Go]]></title>
+    <link href="http://tappsi.github.io/blog/2017/01/20/an-airbrake-webhook-in-go/"/>
+    <updated>2017-01-20T17:39:27-05:00</updated>
+    <id>http://tappsi.github.io/blog/2017/01/20/an-airbrake-webhook-in-go</id>
+    <content type="html"><![CDATA[<p>We at Tappsi use Airbrake for reporting errors from our Rails API. Airbrake provides an integration mechanism via webhooks for dealing with the errors reported by the platform, the developer only has to expose an endpoint to be consumed by Airbrake, where the error messages will be sent.</p>
+
+<p>This is a very common need, so we decided to implement a microservice for it that can be reused by other projects. We chose to write it in Go to show the usage of several high-performance Go libraries and frameworks, and to demonstrate how to send messages to a RabbitMQ exchange using a connection pool.</p>
+
+<p>The best part is that this is an open source project! Feel free to download and use it in your own applications:</p>
+
+<p><a href="https://github.com/tappsi/airbrake-webhook">https://github.com/tappsi/airbrake-webhook</a></p>
+
+<p>Refer to the homepage of the project for the documentation and further details, all comments and contributions are welcome!</p>
+]]></content>
+  </entry>
+  
+</feed>
