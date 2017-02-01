@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Github | Tappsi's Engineering and Technology Blog]]></title>
   <link href="http://tappsi.github.io/blog/categories/github/atom.xml" rel="self"/>
   <link href="http://tappsi.github.io/"/>
-  <updated>2017-01-23T10:47:42-05:00</updated>
+  <updated>2017-02-01T11:37:51-05:00</updated>
   <id>http://tappsi.github.io/</id>
   <author>
     <name><![CDATA[Tappsi]]></name>
@@ -21,6 +21,9 @@
     <content type="html"><![CDATA[<p>A veces, cuando trabajamos con Python y tenemos varios repositorios privados, surge la necesidad de compartir código entre ellos. En ésta entrada vamos a ver cómo hacer un repositorio privado de Python y poder instalarlo usando el sistema de gestión de paquetes <code>pip</code>.</p>
 
 <p>Primero creamos un repositorio en GitHub con el código de Python que queremos usar en proyectos diferentes. Decimos que nuestro repositorio tenga el url</p>
+
+<!--more-->
+
 
 <pre><code>https://github.com/tappsi/python_repo
 </code></pre>

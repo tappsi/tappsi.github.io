@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Python | Tappsi's Engineering and Technology Blog]]></title>
   <link href="http://tappsi.github.io/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://tappsi.github.io/"/>
-  <updated>2017-01-23T10:47:42-05:00</updated>
+  <updated>2017-02-01T11:37:51-05:00</updated>
   <id>http://tappsi.github.io/</id>
   <author>
     <name><![CDATA[Tappsi]]></name>
@@ -21,6 +21,9 @@
     <content type="html"><![CDATA[<p>A veces, cuando trabajamos con Python y tenemos varios repositorios privados, surge la necesidad de compartir código entre ellos. En ésta entrada vamos a ver cómo hacer un repositorio privado de Python y poder instalarlo usando el sistema de gestión de paquetes <code>pip</code>.</p>
 
 <p>Primero creamos un repositorio en GitHub con el código de Python que queremos usar en proyectos diferentes. Decimos que nuestro repositorio tenga el url</p>
+
+<!--more-->
+
 
 <pre><code>https://github.com/tappsi/python_repo
 </code></pre>
@@ -72,6 +75,8 @@ git push --tags
     <updated>2016-11-28T11:16:14-05:00</updated>
     <id>http://tappsi.github.io/blog/2016/11/28/como-pintar-poligonos-en-mapbox-usando-geohashes</id>
     <content type="html"><![CDATA[<p>En nuestro ejemplo tenemos información acerca de velocidades (<em>km/h</em>) para cada sector de nuestra ciudad representado por un geohash:</p>
+
+<p>excerpt_separator: <!--more--></p>
 
 <p><figure class='code'><figcaption><span>geohashes.json </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -279,6 +284,9 @@ para mostrar un listado de objetos que pertenecen a un modelo específico.</p>
 
 <p>Ahora miramos cómo agregar un formulario de búsqueda, para que nuestro usuario
 pueda filtrar los objetos por sus campos:</p>
+
+<!--more-->
+
 
 <p><img src="/images/posts/passengers-search-form.png" title="Listado de pasajeros con formulario de búsqueda" ></p>
 
@@ -556,6 +564,9 @@ para renderizar los formularios con las clases de <a href="http://getbootstrap.c
 
 <p>Vamos a hacer un <code>ListView</code> que nos ayude a crear listados de objetos, generados
 a partir de un modelo específico.</p>
+
+<!--more-->
+
 
 <p>Primero definimos una clase base <code>BaseView</code> que nos permitirá analizar las peticiones
 y devolver el contexto y renderizar la plantilla:</p>

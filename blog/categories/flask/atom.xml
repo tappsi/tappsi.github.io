@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Flask | Tappsi's Engineering and Technology Blog]]></title>
   <link href="http://tappsi.github.io/blog/categories/flask/atom.xml" rel="self"/>
   <link href="http://tappsi.github.io/"/>
-  <updated>2017-01-23T10:47:42-05:00</updated>
+  <updated>2017-02-01T11:37:51-05:00</updated>
   <id>http://tappsi.github.io/</id>
   <author>
     <name><![CDATA[Tappsi]]></name>
@@ -23,6 +23,9 @@ para mostrar un listado de objetos que pertenecen a un modelo específico.</p>
 
 <p>Ahora miramos cómo agregar un formulario de búsqueda, para que nuestro usuario
 pueda filtrar los objetos por sus campos:</p>
+
+<!--more-->
+
 
 <p><img src="/images/posts/passengers-search-form.png" title="Listado de pasajeros con formulario de búsqueda" ></p>
 
@@ -300,6 +303,9 @@ para renderizar los formularios con las clases de <a href="http://getbootstrap.c
 
 <p>Vamos a hacer un <code>ListView</code> que nos ayude a crear listados de objetos, generados
 a partir de un modelo específico.</p>
+
+<!--more-->
+
 
 <p>Primero definimos una clase base <code>BaseView</code> que nos permitirá analizar las peticiones
 y devolver el contexto y renderizar la plantilla:</p>
