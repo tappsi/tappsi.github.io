@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Presentation | Tappsi's Engineering and Technology Blog]]></title>
+  <link href="http://tappsi.github.io/blog/categories/presentation/atom.xml" rel="self"/>
+  <link href="http://tappsi.github.io/"/>
+  <updated>2017-02-17T17:06:35-05:00</updated>
+  <id>http://tappsi.github.io/</id>
+  <author>
+    <name><![CDATA[Tappsi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Presentaciones Pycon 2017]]></title>
+    <link href="http://tappsi.github.io/blog/2017/02/17/presentaciones-pycon-2017/"/>
+    <updated>2017-02-17T07:17:46-05:00</updated>
+    <id>http://tappsi.github.io/blog/2017/02/17/presentaciones-pycon-2017</id>
+    <content type="html"><![CDATA[<p>Nos encanta compartir lo que hacemos en Tappsi y cómo logramos resolver algunos problemas que enfrentamos día a día. Python es una herramienta que nos ha permitido crecer con agilidad, por tal motivo participamos en <a href="http://pycon.co">pycon</a>.   Cerca a este evento se dió un DevDay, en el cual, también expusimos.</p>
+
+<p>Nuestros conferencistas y temas fueron:</p>
+
+<ul>
+<li>Oscar Moreno: <a href="http://www.slideshare.net/gremly/elixir-otp">Introducción a OTP desde Elixir</a></li>
+<li>Vera Mazhuga: <a href="http://slides.com/vero4ka/flask-con-todas-las-arandelas">Flask con todas las arandelas</a></li>
+<li>Pablo Vallejo: <a href="http://slides.com/pablovallejo/rails-docker#/">Docker talk</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>
